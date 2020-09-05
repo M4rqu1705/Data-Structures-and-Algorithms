@@ -1,0 +1,249 @@
+# DATA STRUCTURES:
+
+# Needs organizing and it would probably be better to change to .docx
+##Collections:
+1. List
+**Good for processing items**
+	- get at a specific item by giving its position
+	- search for a specific value
+	- iterate through the list
+	- find items within a specific name
+- ArrayList
+	- It has all feautures of a list
+	- Add and del items at will and in any position
+	- You can iterate thru an ArrayList using a **simplified** loop:
+```
+for (String n : names) {
+	System.out.println(n);
+}
+```
+	- *Ex. ArrayList<string> names = new ArrayList<>();*
+	- Note: so like vectors in c++?
+-LinkedList
+	- All feautures of a list
+	- Faster than ArrayList
+	- You can insert/delete more easily
+	- You cannot get a specific item without working through the list
+	- LinkedLists are of a particular type which s shown in angle brackets
+	- You can iterate through a list using the same simplified loop as in ArrayList
+	- *Ex. LinkedList<String> names = new LinkedList<>();*
+
+
+2. Set
+**When item is unique**
+- It cannot contain duplicates
+- Items can be added or removed easily
+- Fast af
+- The order is not necessarily maintained
+- TreeSet type orders the data
+	> SortedSet
+	> HashSet
+	> TreeSet
+	> LinkedHashSet
+3. Queue
+- It is an abstract class (relies on other data types)
+- methods: 
+> Add
+> Peek
+> Poke
+*(Think of a queue in a shop: Ppl can be added, you can check the next customer or serve them and then they go away)*
+- *Example: Queue<String> q = new LinkedList<String>();
+
+4. Map
+**For manipulating sets of data**
+- Also an abstract class 
+- Good at math concept of sets
+	- find intersection sets, subsets, non-intersecting items, etc.
+- It has a key-value pair
+- *Ex. 2, Fred
+- Each key must be unique
+	> SortedMap
+	> HashMap
+	> TreeMap
+	> LinkedHashMap
+
+## Too-many Associations
+
+**Bag vs List vs Set**
+
+- List = ordered
+- Bag: unordered, items cannot be removed, has different objects
+	- for loop seems to be the simplified one
+- Queue: first comes, first served
+	- FIFO (First in, Firs out)
+
+- List: better perf
+- Set: no duplicates
+
+*Hibernate???*
+- *seems like Java uses it to handle data structs*
+- Apparently for a lot of stuff do not use bags
+	- Bags delete item ->insert new bag
+	- Use Sets better ->only removes record that represent association -> all other data are not affected
+
+- Stacks: 
+	- Think of a jar.
+	- you can push to add and pop to remove
+	- you can only remove from the top (last one you have added)
+	- So it's ordered
+	- LIFO (last in - first out)
+	- used mostly in compiler design
+
+### Referencias:
+- (⨘ } Algorithms } 41 } Data Structures } Bags, Queues, Stacks })[https://www.youtube.com/watch?v=JgvGw4OoFnw]
+- (Java - Overview of data structures)[https://www.youtube.com/watch?v=Xzk3XLveA00&t=6s]
+- (Bag vs. List vs. Set: Most Efficient Data Type for To-Many Associations?)[https://www.youtube.com/watch?v=IR40_m2mPe0]
+
+#DATA STRUCTURES:
+
+##Collections:
+1. List
+**Good for processing items**
+	- get at a specific item by giving its position
+	- search for a specific value
+	- iterate through the list
+	- find items within a specific name
+- ArrayList
+	- It has all feautures of a list
+	- Add and del items at will and in any position
+	- You can iterate thru an ArrayList using a **simplified** loop:
+```
+for (String n : names) {
+	System.out.println(n);
+}
+```
+	- *Ex. ArrayList<string> names = new ArrayList<>();*
+	- Note: so like vectors in c++?
+-LinkedList
+	- All feautures of a list
+	- Faster than ArrayList
+	- You can insert/delete more easily
+	- You cannot get a specific item without working through the list
+	- LinkedLists are of a particular type which s shown in angle brackets
+	- You can iterate through a list using the same simplified loop as in ArrayList
+	- *Ex. LinkedList<String> names = new LinkedList<>();*
+
+
+2. Set
+**When item is unique**
+- It cannot contain duplicates
+- Items can be added or removed easily
+- Fast af
+- The order is not necessarily maintained
+- TreeSet type orders the data
+	> SortedSet
+	> HashSet
+	> TreeSet
+	> LinkedHashSet
+3. Queue
+- It is an abstract class (relies on other data types)
+- methods: 
+> Add
+> Peek
+> Poke
+*(Think of a queue in a shop: Ppl can be added, you can check the next customer or serve them and then they go away)*
+- *Example: Queue<String> q = new LinkedList<String>();
+
+4. Map
+**For manipulating sets of data**
+- Also an abstract class 
+- Good at math concept of sets
+	- find intersection sets, subsets, non-intersecting items, etc.
+- It has a key-value pair
+- *Ex. 2, Fred
+- Each key must be unique
+	> SortedMap
+	> HashMap
+	> TreeMap
+	> LinkedHashMap
+
+....
+## Too-many Associations
+
+**Bag vs List vs Set**
+
+- List = ordered
+- Bag: unordered, items cannot be removed, has different objects
+	- for loop seems to be the simplified one
+- Queue: first comes, first served
+	- FIFO (First in, Firs out)
+
+- List: better perf
+- Set: no duplicates
+
+*Hibernate???*
+- *seems like Java uses it to handle data structs*
+- Apparently for a lot of stuff do not use bags
+	- Bags delete item ->insert new bag
+	- Use Sets better ->only removes record that represent association -> all other data are not affected
+
+- Stacks: 
+	- Think of a jar.
+	- you can push to add and pop to remove
+	- you can only remove from the top (last one you have added)
+	- So it's ordered
+	- LIFO (last in - first out)
+	- used mostly in compiler design
+
+### Referencias:
+- (⨘ } Algorithms } 41 } Data Structures } Bags, Queues, Stacks })[https://www.youtube.com/watch?v=JgvGw4OoFnw]
+- (Java - Overview of data structures)[https://www.youtube.com/watch?v=Xzk3XLveA00&t=6s]
+- (Bag vs. List vs. Set: Most Efficient Data Type for To-Many Associations?)[https://www.youtube.com/watch?v=IR40_m2mPe0]
+
+
+## (FeeCodeCamp vid)[https://www.youtube.com/watch?v=RBSGKlAvoiM]
+
+### Why data structures?
+	- for faster and more powerful algorithms
+	- help manage and organize data
+	- make code cleaner and easier to understand
+### Abstract data type vs Data Type
+- **Abstract Data Type (ADT)**
+	- abstraction of a data struct that provides only the interface to whch a data struct. must adhere to.
+	- Interface does not give any specific details about how something should be implemented or in what prog lang.
+- *We want to get from A to B with some transportation, the transportation method is the data struct*
+- * Ex. 
+Abstraction (ADT)-- | - List -------------------------| -- Queue--------------------| -Map-------------------------- | ---Vehicle----------------|
+------------------- |--- --- --- --- --- --- --- --- ---|---------------------------|--------------------------------|---------------------------|
+Implementation (DS) | Dynamic Array and LinkedLst | LinkedList, Array, Stack based| Tree Map, Hash Map/Hash Table | --- Golf cart, smart car, -|*
+
+### Big-0 Notation
+- Complexity analysis
+	- How much time for algorithm to finish
+	- How much space does algorithm need
+
+*Big-0 Notation:*
+	- Gives the worst case scenario for your algorithm
+	- take into account what happens when input is huge
+- n = Size of input
+- Complexities ordered from smallest to largest
+	> Constant Time: O(1)
+	> Logarithmic Time: O(log(n))
+	> Linear Time: O(n)
+	> Linearithmic Time: O(nlog(n))
+	> Quadric Time: 0(n^2)
+	> Cubic Time: O(n^3)
+	> Exponential Time: O(b^n), b>1
+	> Factorial Time: O(n!)
+*Properties*
+- O (n + c) = O (n)
+- O (cn) = O(n), c> 0
+...
+- Let f be function that describes the running time of a particular algorithm for an input of size n:
+```
+f(n) = 7log(n)^3 + 15n^2 + 2n^3 + 8
+**O(f(n)) = O(n^3)**
+```
+*Since n^3 is the biggest*
+
+- **Ex. run in const. time: O(1)
+
+- Note: For Big-O multiply loops that are in different levels and add those that are in the same level
+## End of my class #1 (16:54)
+
+
+
+
+
+
+ 
