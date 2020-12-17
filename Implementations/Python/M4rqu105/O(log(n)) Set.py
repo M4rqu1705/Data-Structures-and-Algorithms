@@ -300,9 +300,4 @@ if __name__ == "__main__":
     for i in range(70,91):
         set4.add(chr(i))
 
-    for i in range(len(set1.mySet)-1):
-        if set1.mySetHashes[i] > set1.mySetHashes[i+1]:
-            print("Error!")
-            exit()
-
     breakpoint()
