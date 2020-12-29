@@ -1,22 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 '''
-This Python script implements a set keeping the elements in order
+This Python script implements a set using hashes.
 
-It's operations time complexity ranges from O(log(n)) to O(n²)
+It does it's best for the average time complexity to be O(1) to O(n) for most of the operations
+
+For the worst case scenarios (where there are hash collisions), the time complexity for those
+operations increases to O(n) to O(n²)
 
 '''
 
 
+DEFAULT_SIZE = 10
+
 class Set:
-    def __init__(self, dataType):
-        self.mySet = []
-        self.mySetHashes = []
+    def __init__(self, dataType, initial_capacity = DEFAULT_SIZE):
+        self.currentSize = 0
+        self.mySet = [None] * initial_capacity
         self.dataType = dataType
 
 
     # 🔧🔨⛏ HELPER FUNCTIONS ⚙🛠⚒
 
+    # Time complexity: O(1)
     def validElement(self, element):
         # Check if set has correct data type
         if not isinstance(element, self.dataType):
@@ -30,30 +36,38 @@ class Set:
         else:
             return True
 
-    # It's a static method since it doesn't matter if it is called by an instance of the class or the class itself
-    @staticmethod
-    def binarySearch(element, array):
-        start, end = 0, len(array)
-        mid = (start + end) // 2
 
-        while start != end:
-            #  breakpoint()
-            #  print("Inside binary search")
-            if array[mid] > element:
-                end = mid
-                mid = (start + end) // 2
-            elif array[mid] < element:
-                start = mid + 1
-                mid = (start + end) // 2
-            else:
-                return mid
+    # Time complexity: O(n)
+    def expand(self):
+        # Make new set twice the size of this set
+        tempSet = Set(self.dataType, self.capacity() * 2)
 
-        return -1
+        # Add every element from this set to the new set
+        for el in self:
+            tempSet.add(el)
+
+        # Reassign mySet to be the new Set's set
+        self.mySet = tempSet.mySet[:]
+
+
+    # Time complexity: O(n)
+    def contract(self):
+        # Make new set half the size of this set
+        tempSet = Set(self.dataType, self.capacity() // 2)
+
+        # Add every element from this set to the new set
+        for el in self:
+            tempSet.add(el)
+
+        # Reassign mySet to be the new Set's set
+        self.mySet = tempSet.mySet[:]
+
 
 
     # 👜🎒 SET ADT METHOD 💼🏎
 
-    # Time complexity: O(log(n))
+    # Average-case time complexity: O(1)
+    # Worst-case time complexity: O(n)
     def contains(self, element):
         # Force element to be desired data type if it is valid
         if not self.validElement(element):
@@ -61,14 +75,21 @@ class Set:
         else:
             element = self.dataType(element)
 
-        # Perform binary search to look for element
-        position = self.binarySearch(hash(element), self.mySetHashes)
+        # Make hash and divide it modulo the set's length in order to find it's position
+        position = hash(element) % self.capacity()
 
-        return position >= 0
+        # If the element was sucessfully found:
+        if self.mySet[position] == element:
+            return True
+
+        # Otherwise
+        else:
+            # Perform linear search to look for the element
+            return element in self.mySet
 
 
-
-    # Time complexity: O(n)
+    # Average-case time complexity: O(1)
+    # Worst-case time complexity: O(n)
     def add(self, element):
         # Force element to be desired data type if it is valid
         if not self.validElement(element):
@@ -80,34 +101,31 @@ class Set:
         if element in self:
             return False
 
-        elementHash = hash(element)
+        # Expand set whenever it's length is close to getting to half it's capacity
+        if self.size() + 1 > self.capacity() // 2:
+            self.expand()
 
-        # Perform linear search to find where to put the element
-        index = -1
+        # Make hash and divide it modulo the set's length in order to find it's position
+        position = hash(element) % self.capacity()
 
-        if self.isEmpty():
-            self.mySet.append(element)
-            self.mySetHashes.append(elementHash)
+        # If the element was not found:
+        if self.mySet[position] is None:
+            self.mySet[position] = element
+            self.currentSize += 1
             return True
 
-
-        if self.mySetHashes[0] > elementHash:
-            index = 0
-        elif self.mySetHashes[-1] < elementHash:
-            index = self.size()
+        # Otherwise ...
         else:
-            for i in range(self.size() - 1):
-                if self.mySetHashes[i] < elementHash and elementHash < self.mySetHashes[i + 1]:
-                    index = i+1
-                    break
-
-        # Insert element to set
-        self.mySet.insert(index, element)
-        self.mySetHashes.insert(index, elementHash)
-        return True
+            # Perform linear search until empty slot is found
+            for i in range(len(self.mySet)):
+                if self.mySet[i] is None:
+                    self.mySet[i] = element
+                    self.currentSize += 1
+                    return True
 
 
-    # Time complexity: O(n)
+    # Average-case time complexity: O(1)
+    # Worst-case time complexity: O(n)
     def remove(self, element):
         # Force element to be desired data type if it is valid
         if not self.validElement(element):
@@ -119,35 +137,65 @@ class Set:
         if element not in self:
             return False
 
-        elementHash = hash(element)
+        # Contract set whenever it's length is close to getting to a quarter of it's capacity
+        if self.size() < self.capacity() // 4:
+            self.contract()
 
-        # Perform binary search to look for element
-        position = self.binarySearch(elementHash, self.mySetHashes)
+        # Make hash and divide it modulo the set's length in order to find it's position
+        position = hash(element) % self.capacity()
 
-        del self.mySet[position]
-        del self.mySetHashes[position]
+        # If the element was found:
+        if self.mySet[position] == element:
+            self.mySet[position] = None
+            self.currentSize -= 1
+            return True
+
+        # Otherwise ...
+        else:
+            # Perform linear search until element is found
+            for i in range(self.capacity()):
+                if self.mySet[i] == element:
+                    self.mySet[i] = None
+                    self.currentSize -= 1
+                    return True
+
+            return False
+
 
     # Time complexity: O(n)
     def clear(self):
+        # Store capacity of previous set
+        capacity = self.capacity()
+
         # Delete set
         del self.mySet
-        del self.mySetHashes
-        # Create new empty set
-        self.mySet = []
-        self.mySetHashes = []
+
+        # Create new one with the previous capacity, but none of the elements
+        self.mySet = [None] * capacity
+        self.currentSize = 0
+
         return True
 
 
     # Equivalent to the length (or the amount of actual elements it has)
     # Time complexity: O(1)
     def size(self):
+        return self.currentSize
+
+
+    # Equivalent to how many elements it would be able to hold
+    # Time complexity: O(1)
+    def capacity(self):
         return len(self.mySet)
+
 
     # Time complexity: O(1)
     def isEmpty(self):
         return self.size() == 0
 
-    # Time complexity: O(n²)
+
+    # Average-case time complexity: O(n)
+    # Worst-case time complexity: O(n²)
     def union(self, s2):
         # Check if sets have the same types
         if self.dataType != s2.dataType:
@@ -165,11 +213,35 @@ class Set:
         return s3
 
 
-    # Time complexity: O(n² log(n))??
+    # Average-case time complexity: O(min(n, m))
+    # Worst-case time complexity: O(n * m)
     def intersection(self, s2):
-        return self.difference(self.difference(s2))
+        # Check if sets have the same types
+        if self.dataType != s2.dataType:
+            return None
 
-    # Time complexity: O(n² log(n)) ??
+        s3 = Set(self.dataType)
+
+        # Determine which is the smallest set
+        small_set = None
+        big_set = None
+
+        if self.size() < s2.size():
+            small_set = self
+            big_set = s2
+        else:
+            small_set = s2
+            big_set = self
+
+        # Use the smallest set to iterate the least amount of times through the sets
+        for el in small_set:
+            if el in big_set:
+                s3.add(el)
+
+        return s3
+
+    # Average-case time complexity: O(n)
+    # Worst-case time complexity: O(n²)
     def difference(self, s2):
         # Check if sets have the same types
         if self.dataType != s2.dataType:
@@ -188,7 +260,9 @@ class Set:
 
         return s3
 
-    # Time complexity: O(n log(n))
+
+    # Average-case time complexity: O(n)
+    # Worst-case time complexity: O(n²)
     def subset(self, s2):
         # Check if sets have the same types
         if self.dataType != s2.dataType:
@@ -209,7 +283,7 @@ class Set:
 
     # Get the current size of this set
     def __len__(self):
-        return self.size()
+        return self.currentSize
 
     # When testing membership with the "in" operator
     def __contains__(self, el):
@@ -276,9 +350,12 @@ class Set:
         return self
 
     def __next__(self):
-        if self.iterationIndex < self.size():
+        while self.iterationIndex < self.capacity():
             self.iterationIndex += 1
-            return self.mySet[self.iterationIndex - 1]
+            if self.mySet[self.iterationIndex - 1] is None:
+                continue
+            else:
+                return self.mySet[self.iterationIndex - 1]
 
         raise StopIteration
 

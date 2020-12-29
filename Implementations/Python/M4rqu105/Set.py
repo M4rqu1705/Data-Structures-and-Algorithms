@@ -158,10 +158,10 @@ class Set:
                     self.mySet[i] = None
                     self.currentSize -= 1
                     return True
-            
+
             return False
-        
-        
+
+
     # Time complexity: O(n)
     def clear(self):
         # Store capacity of previous set
@@ -173,7 +173,7 @@ class Set:
         # Create new one with the previous capacity, but none of the elements
         self.mySet = [None] * capacity
         self.currentSize = 0
-        
+
         return True
 
 
@@ -321,7 +321,7 @@ class Set:
     def __gt__(self, s2):
         return self.subset(s2) and len(self) > len(s2)
 
-    # When sets are equal, their difference will be 0 
+    # When sets are equal, their difference will be 0
     def __eq__(self, s2):
         return (self - s2).size() == 0
 
@@ -358,7 +358,7 @@ class Set:
                 return self.mySet[self.iterationIndex - 1]
 
         raise StopIteration
-    
+
 
 if __name__ == "__main__":
     set1 = Set(str)

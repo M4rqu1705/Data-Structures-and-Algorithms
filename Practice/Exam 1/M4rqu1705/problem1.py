@@ -14,7 +14,12 @@ def partC(BaseballPlayers, BasketballPlayers, FootballPlayers):
     # OR
     # FootballPlayers.union(BasketballPlayers).contains("Tom") && !BaseballPlayers.contains("Tom")
 
-    return "Tom" in FootballPlayers.union(BasketballPlayers).difference(BaseballPlayers)
+    # MAL X
+    #  return "Tom" in FootballPlayers.union(BasketballPlayers).difference(BaseballPlayers)
+
+    # Respuesta correcta V
+    return "Tom" in FootballPlayers.intersection(BasketballPlayers).difference(BaseballPlayers)
+
 
 def partD(L, X):
     # If the first index of the element is the same as the last, the element appears just once
