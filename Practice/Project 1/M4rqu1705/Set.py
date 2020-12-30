@@ -14,33 +14,37 @@ operations increases to O(n) to O(n²)
 DEFAULT_SIZE = 10
 
 class Set:
-    def __init__(self, dataType, initial_capacity = DEFAULT_SIZE):
+    def __init__(self, param = None):
         self.currentSize = 0
-        self.mySet = [None] * initial_capacity
-        self.dataType = dataType
+
+        # By default the method will simply make an empty set with the default capacity
+        if param is None:
+            self.mySet = [None] * DEFAULT_SIZE
+
+        # If param is an integer, we can use it as the initial set capacity
+        elif isinstance(param, int):
+            self.mySet = [None] * param
+
+        # Finally, if param is anything else, assume it is an iterator and try to populate the set
+        # with its data
+        else:
+            self.mySet = [None] * DEFAULT_SIZE
+            try:
+                iter(param)
+                for element in param:
+                    self.add(element)
+
+            # If the iterator assumption is false, then just ignore everything
+            except:
+                pass
 
 
     # 🔧🔨⛏ HELPER FUNCTIONS ⚙🛠⚒
 
-    # Time complexity: O(1)
-    def validElement(self, element):
-        # Check if set has correct data type
-        if not isinstance(element, self.dataType):
-            # If it is not, try to force it
-            try:
-                element = self.dataType(element)
-                return True
-            # If it cannot be forced, then element cannot be in set
-            except:
-                return False
-        else:
-            return True
-
-
     # Time complexity: O(n)
     def expand(self):
         # Make new set twice the size of this set
-        tempSet = Set(self.dataType, self.capacity() * 2)
+        tempSet = Set(self.capacity() * 2)
 
         # Add every element from this set to the new set
         for el in self:
@@ -53,7 +57,7 @@ class Set:
     # Time complexity: O(n)
     def contract(self):
         # Make new set half the size of this set
-        tempSet = Set(self.dataType, self.capacity() // 2)
+        tempSet = Set(self.capacity() // 2)
 
         # Add every element from this set to the new set
         for el in self:
@@ -69,12 +73,6 @@ class Set:
     # Average-case time complexity: O(1)
     # Worst-case time complexity: O(n)
     def contains(self, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return False
-        else:
-            element = self.dataType(element)
-
         # Make hash and divide it modulo the set's length in order to find it's position
         position = hash(element) % self.capacity()
 
@@ -91,12 +89,6 @@ class Set:
     # Average-case time complexity: O(1)
     # Worst-case time complexity: O(n)
     def add(self, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return False
-        else:
-            element = self.dataType(element)
-
         # Elements cannot be repeated
         if element in self:
             return False
@@ -127,12 +119,6 @@ class Set:
     # Average-case time complexity: O(1)
     # Worst-case time complexity: O(n)
     def remove(self, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return False
-        else:
-            element = self.dataType(element)
-
         # Element must be inside the set in order to be removed
         if element not in self:
             return False
@@ -197,11 +183,7 @@ class Set:
     # Average-case time complexity: O(n)
     # Worst-case time complexity: O(n²)
     def union(self, s2):
-        # Check if sets have the same types
-        if self.dataType != s2.dataType:
-            return None
-
-        s3 = Set(self.dataType)
+        s3 = Set()
 
         # Add all of self's and s2's elements to s3
         for el in self:
@@ -216,11 +198,7 @@ class Set:
     # Average-case time complexity: O(min(n, m))
     # Worst-case time complexity: O(n * m)
     def intersection(self, s2):
-        # Check if sets have the same types
-        if self.dataType != s2.dataType:
-            return None
-
-        s3 = Set(self.dataType)
+        s3 = Set()
 
         # Determine which is the smallest set
         small_set = None
@@ -243,11 +221,7 @@ class Set:
     # Average-case time complexity: O(n)
     # Worst-case time complexity: O(n²)
     def difference(self, s2):
-        # Check if sets have the same types
-        if self.dataType != s2.dataType:
-            return None
-
-        s3 = Set(self.dataType)
+        s3 = Set()
 
         # Add every element from self to s3 ...
         for el in self:
@@ -264,10 +238,6 @@ class Set:
     # Average-case time complexity: O(n)
     # Worst-case time complexity: O(n²)
     def subset(self, s2):
-        # Check if sets have the same types
-        if self.dataType != s2.dataType:
-            return None
-
         for el in s2:
             if el not in self:
                 return False
@@ -284,6 +254,10 @@ class Set:
     # Get the current size of this set
     def __len__(self):
         return self.currentSize
+
+    # Machine readable representation of this set
+    def __repr__(self):
+        return str(list(self))
 
     # When testing membership with the "in" operator
     def __contains__(self, el):

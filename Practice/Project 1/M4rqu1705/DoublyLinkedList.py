@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 class DoublyLinkedList:
     class Node:
         def __init__(self):
@@ -8,11 +9,10 @@ class DoublyLinkedList:
             self.prev = None
 
 
-    def __init__(self, dataType):
+    def __init__(self, param = None):
         self.head = self.Node()
         self.tail = self.Node()
         self.currentSize = 0
-        self.dataType = dataType
 
         self.head.value = None
         self.tail.value = None
@@ -22,34 +22,23 @@ class DoublyLinkedList:
         self.tail.prev = self.head
         self.tail.next = None
 
-
-    # 🔧🔨⛏ HELPER FUNCTIONS ⚙🛠⚒
-
-    # Time complexity: O(1)
-    def validElement(self, element):
-        # Check if bag has correct data type
-        if not isinstance(element, self.dataType):
-            # If it is not, try to force it
-            try:
-                element = self.dataType(element)
-                return True
-            # If it cannot be forced, then element cannot be in bag
-            except:
-                return False
+        if isinstance(param, int):
+            for i in range(param):
+                self.append(None)
         else:
-            return True
+            try:
+                iter(param)
+
+                for element in param:
+                    self.append(element)
+            except:
+                pass
 
 
     # 👜🎒 LINKED LIST ADT METHODS 💼🏎
 
     # Time complexity: O(1)
     def append(self, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return False
-        else:
-            element = self.dataType(element)
-
         # Create new node
         newNode = self.Node()
         newNode.value = element
@@ -68,12 +57,6 @@ class DoublyLinkedList:
 
     # Time complexity: O(n)
     def insert(self, index, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return False
-        else:
-            element = self.dataType(element)
-
         # Check if index is valid
         if 0 > index or index > self.size():
             return False
@@ -103,14 +86,8 @@ class DoublyLinkedList:
 
     # Time complexity: O(n)
     def remove(self, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return False
-        else:
-            element = self.dataType(element)
-
         # Travel to the node that contains the desired element
-        ith_node = self.head
+        ith_node = self.head.next
         while ith_node.value != element and ith_node is not self.tail:
             ith_node = ith_node.next
 
@@ -118,7 +95,7 @@ class DoublyLinkedList:
         if ith_node is self.tail:
             return False
 
-        # Do some meaintenance on the surrounding nodes
+        # Do some maintenance on the surrounding nodes
         ith_node.prev.next = ith_node.next
         ith_node.next.prev = ith_node.prev
 
@@ -130,14 +107,8 @@ class DoublyLinkedList:
 
     # Time complexity: O(n)
     def remove_all(self, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return 0
-        else:
-            element = self.dataType(element)
-
         counter = 0
-        ith_node = self.head
+        ith_node = self.head.next
         
         while ith_node is not self.tail:
             # Travel to the node that contains the desired element
@@ -204,12 +175,6 @@ class DoublyLinkedList:
 
     # Time complexity: O(n)
     def set(self, index, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return False
-        else:
-            element = self.dataType(element)
-
         # Travel to the node exactly at the 'index'th position
         ith_node = self.head
         i = -1
@@ -234,15 +199,9 @@ class DoublyLinkedList:
 
     # Time complexity: O(n)
     def index(self, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return -1
-        else:
-            element = self.dataType(element)
-
         # Travel to the node that contains the desired element
-        ith_node = self.head
-        i = -1
+        ith_node = self.head.next
+        i = 0
         while ith_node.value != element and ith_node is not self.tail:
             ith_node = ith_node.next
             i += 1
@@ -257,15 +216,9 @@ class DoublyLinkedList:
 
     # Time complexity: O(n)
     def last_index(self, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return -1
-        else:
-            element = self.dataType(element)
-
         # Travel to the node that contains the desired element
-        ith_node = self.tail
-        i = self.size()
+        ith_node = self.tail.prev
+        i = self.size() - 1
         while ith_node.value != element and ith_node is not self.head:
             ith_node = ith_node.prev
             i -= 1
@@ -291,14 +244,8 @@ class DoublyLinkedList:
 
     # Time complexity: O(n)
     def contains(self, element):
-        # Force element to be desired data type if it is valid
-        if not self.validElement(element):
-            return False
-        else:
-            element = self.dataType(element)
-
         # Travel to the node that contains the desired element
-        ith_node = self.head
+        ith_node = self.head.next
         while ith_node.value != element and ith_node is not self.tail:
             ith_node = ith_node.next
 
@@ -339,19 +286,15 @@ class DoublyLinkedList:
 
     # When this linked list is added with another, return the merging of both
     def __add__(self, l2):
-        if self.dataType == l2.dataType:
-            tempList = DoublyLinkedList(self.dataType)
+        tempList = DoublyLinkedList()
 
-            for el in self:
-                tempList.add(el)
+        for el in self:
+            tempList.add(el)
 
-            for el in l2:
-                tempList.add(el)
+        for el in l2:
+            tempList.add(el)
 
-            return tempList
-        
-        else:
-            return None
+        return tempList
 
 
     # When using the [] to get the item:
@@ -371,7 +314,7 @@ class DoublyLinkedList:
                 i += 1
 
             # Prepare output linked list
-            output = DoublyLinkedList(self.dataType)
+            output = DoublyLinkedList()
 
             # Append all relevant data to the output linked list
             while i < end:
@@ -425,5 +368,3 @@ if __name__ == "__main__":
     ll1 = DoublyLinkedList(str)
     for i in range(65,91):
         ll1.append(chr(i))
-
-    breakpoint()
