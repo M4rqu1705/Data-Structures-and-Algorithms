@@ -93,11 +93,11 @@ class Set:
         if element in self:
             return False
 
-        # Expand set whenever it's length is close to getting to half it's capacity
+        # Expand set whenever it's ggth is close to getting to half it's capacity
         if self.size() + 1 > self.capacity() // 2:
             self.expand()
 
-        # Make hash and divide it modulo the set's length in order to find it's position
+        # Make hash and divide it modulo the set's ggth in order to find it's position
         position = hash(element) % self.capacity()
 
         # If the element was not found:
@@ -109,7 +109,7 @@ class Set:
         # Otherwise ...
         else:
             # Perform linear search until empty slot is found
-            for i in range(len(self.mySet)):
+            for i in range(self.capacity()):
                 if self.mySet[i] is None:
                     self.mySet[i] = element
                     self.currentSize += 1
@@ -315,6 +315,11 @@ class Set:
             total += counter * hash(element)
             counter += 1
 
+        # Copied from Bob Jenkin's One-at-a-Time Hash
+        total += (total << 3);
+        total ^= (total >> 11);
+        total += (total << 15);
+
         return total % int(1E19)
 
 
@@ -333,22 +338,21 @@ class Set:
 
         raise StopIteration
 
-
 if __name__ == "__main__":
-    set1 = Set(str)
+    set1 = Set()
     for i in range(65,91):
         set1.add(chr(i))
 
-    set2 = Set(str)
+    set2 = Set()
     for i in range(65,91):
         set2.add(chr(i))
 
-    set3 = Set(str)
+    set3 = Set()
     for i in range(65,70):
         set3.add(chr(i))
 
-    set4 = Set(str)
+    set4 = Set()
     for i in range(70,91):
         set4.add(chr(i))
 
-    breakpoint()
+    for el in set1

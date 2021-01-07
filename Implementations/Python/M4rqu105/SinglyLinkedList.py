@@ -1,26 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-class DoublyLinkedList:
+# Was heavily inspired by the Doubly Linked List
+class SinglyLinkedList:
     class Node:
         def __init__(self):
             self.value = None
             self.next = None
-            self.prev = None
 
 
     def __init__(self, param = None):
         self.head = self.Node()
-        self.tail = self.Node()
+        self.dummy_tail = self.Node()
         self.currentSize = 0
 
         self.head.value = None
-        self.tail.value = None
+        self.dummy_tail.value = None
 
-        self.head.prev = None
-        self.head.next = self.tail
-        self.tail.prev = self.head
-        self.tail.next = None
+        self.head.next = None
+        self.dummy_tail.next = None
 
         # If a parameter is integer, use it to initialize linked list size
         if isinstance(param, int):
@@ -46,14 +44,23 @@ class DoublyLinkedList:
         # Create new node
         newNode = self.Node()
         newNode.value = element
+        newNode.next = None
 
-        # Change it's prev and next pointers
-        newNode.prev = self.tail.prev
-        newNode.next = self.tail
+        # If linked list is empty ...
+        if self.isEmpty():
+            # Set new node in the required position
+            self.head.next = newNode
 
-        # Do some maintenance on the surrounding nodes
-        self.tail.prev.next = newNode
-        self.tail.prev = newNode
+            # Do some maintenance on dummy tail
+            self.dummy_tail.next = self.head.next
+        
+        # ... otherwise ...
+        else:
+            # Set it in the required position
+            self.dummy_tail.next.next = newNode
+
+            # Do some maintenance on dummy tail
+            self.dummy_tail.next = self.dummy_tail.next.next
 
         self.currentSize += 1
         return True
@@ -63,7 +70,7 @@ class DoublyLinkedList:
     def insert(self, index, element):
         # Check if index is valid
         if 0 > index or index > self.size():
-            raise IndexError(f"Index {index} outside of bounds for Doubly Linked List of size {self.size()}")
+            raise IndexError(f"Index {index} outside of bounds for Singly Linked List of size {self.size()}")
 
         # Travel to the node exactly at the 'index'th position
         current_node = self.head
@@ -72,17 +79,15 @@ class DoublyLinkedList:
             current_node = current_node.next
             i += 1
 
-        # Create new node
         newNode = self.Node()
         newNode.value = element
 
-        # Change it's prev and next pointers
-        newNode.prev = current_node.prev
-        newNode.next = current_node
+        # Set it in the required position
+        current_node.next = newNode
 
-        # Do some maintenance on the surrounding nodes
-        current_node.prev.next = newNode
-        current_node.prev = newNode
+        # Do some maintenance on dummy tail, if necessary
+        if current_node is self.dummy_tail.next:
+            self.dummy_tail = self.dummy_tail.next
 
         self.currentSize += 1
         return True
@@ -90,18 +95,28 @@ class DoublyLinkedList:
 
     # Time complexity: O(n)
     def remove(self, element):
-        # Travel to the node that contains the desired element
-        current_node = self.head.next
-        while current_node.value != element and current_node is not self.tail:
-            current_node = current_node.next
-
-        # Element was not found
-        if current_node is self.tail:
+        # Remove possibility of edge case early on
+        if self.isEmpty():
             return False
 
-        # Do some maintenance on the surrounding nodes
-        current_node.prev.next = current_node.next
-        current_node.next.prev = current_node.prev
+        # Then check if element is inside our linked list. If not, there's no need to remove it
+        elif not self.contains(element):
+            return False
+
+        # Travel to the node before the one that contains the desired element
+        prev_node = self.head
+        current_node = prev_node.next
+
+        while current_node.value != element and current_node.next is not None:
+            prev_node = current_node
+            current_node = prev_node.next
+
+        # Remove the current_node from linked list
+        prev_node.next = prev_node.next.next
+
+        # If element is the last on the list, we need to do maintenance on the dummy tail
+        if prev_node.next is None:
+            self.dummy_tail = prev_node
 
         del current_node
 
@@ -111,26 +126,41 @@ class DoublyLinkedList:
 
     # Time complexity: O(n)
     def remove_all(self, element):
+        # Remove possibility of edge case early on
+        if self.isEmpty():
+            return 0
+
+        # Then check if element is inside our linked list. If not, there's no need to remove it
+        elif not self.contains(element):
+            return 0
+
+
         counter = 0
-        current_node = self.head.next
+        prev_node = self.head
+        current_node = prev_node.next
         
-        while current_node is not self.tail:
+        while current_node is not self.dummy_tail.next:
             # Travel to the node that contains the desired element
-            while current_node.value != element and current_node is not self.tail:
-                current_node = current_node.next
 
-            # Element was not found
-            if current_node is self.tail:
-                return counter
+            while current_node.value != element and current_node.next is not None:
+                prev_node = current_node
+                current_node = prev_node.next
 
-            # Do some meaintenance on the surrounding nodes
-            current_node.prev.next = current_node.next
-            current_node.next.prev = current_node.prev
-            temp = current_node.next
+            # Remove the current_node from linked list
+            prev_node.next = prev_node.next.next
+
+            # Element was not found again, break from while loop
+            if current_node.value != element:
+                break
+
+            # If element is the last on the list, we need to do maintenance on the dummy tail
+            elif prev_node.next is None:
+                self.dummy_tail = prev_node
+
 
             del current_node
 
-            current_node = temp
+            current_node = prev_node.next
 
             counter += 1
 
@@ -142,22 +172,28 @@ class DoublyLinkedList:
     def delete(self, index):
         # Check if index is valid
         if 0 > index or index >= self.size():
-            raise IndexError(f"Index {index} outside of bounds for Doubly Linked List of size {self.size()}")
+            raise IndexError(f"Index {index} outside of bounds for Singly Linked List of size {self.size()}")
 
-        # Travel to the node exactly at the 'index'th position
-        current_node = self.head
-        i = -1
+        # Travel to the node exactly before the 'index'th position
+        prev_node = self.head
+        i = 0
         while i < index:
-            current_node = current_node.next
+            prev_node = prev_node.next
             i += 1
 
-        # Do some meaintenance on the surrounding nodes
-        current_node.prev.next = current_node.next
-        current_node.next.prev = current_node.prev
+        current_node = prev_node.next
+
+        # Remove the current_node from linked list
+        prev_node.next = prev_node.next.next
+
+        # If element is the last on the list, we need to do maintenance on the dummy tail
+        if index == self.size() - 1:
+            self.dummy_tail.next = prev_node
 
         del current_node
 
         self.currentSize -= 1
+
         return True
 
 
@@ -165,7 +201,7 @@ class DoublyLinkedList:
     def get(self, index):
         # Check if index is valid
         if 0 > index or index >= self.size():
-            raise IndexError(f"Index {index} outside of bounds for Doubly Linked List of size {self.size()}")
+            raise IndexError(f"Index {index} outside of bounds for Singly Linked List of size {self.size()}")
 
         # Travel to the node exactly at the 'index'th position
         current_node = self.head
@@ -181,7 +217,7 @@ class DoublyLinkedList:
     def set(self, index, element):
         # Check if index is valid
         if 0 > index or index >= self.size():
-            raise IndexError(f"Index {index} outside of bounds for Doubly Linked List of size {self.size()}")
+            raise IndexError(f"Index {index} outside of bounds for Singly Linked List of size {self.size()}")
 
         # Travel to the node exactly at the 'index'th position
         current_node = self.head
@@ -210,7 +246,7 @@ class DoublyLinkedList:
             return None
         # Can only return last element if linked list is not empty!
         else:
-            return self.tail.prev.value
+            return self.dummy_tail.next.value
 
 
     # Time complexity: O(n)
@@ -218,12 +254,12 @@ class DoublyLinkedList:
         # Travel to the node that contains the desired element
         current_node = self.head.next
         i = 0
-        while current_node.value != element and current_node is not self.tail:
+        while current_node is not None and current_node.value != element:
             current_node = current_node.next
             i += 1
 
         # Element was not found
-        if current_node is self.tail:
+        if current_node.value != element:
             return -1
         
         else:
@@ -233,18 +269,17 @@ class DoublyLinkedList:
     # Time complexity: O(n)
     def last_index(self, element):
         # Travel to the node that contains the desired element
-        current_node = self.tail.prev
-        i = self.size() - 1
-        while current_node.value != element and current_node is not self.head:
-            current_node = current_node.prev
-            i -= 1
+        current_node = self.head.next
+        match_index = -1
+        i = 0
 
-        # Element was not found
-        if current_node is self.head:
-            return -1
-        
-        else:
-            return i
+        while current_node is not None:
+            if current_node.value == element:
+                match_index = i
+            current_node = current_node.next
+            i += 1
+
+        return match_index
 
 
     # Equivalent to the length (or the amount of actual elements it has)
@@ -260,25 +295,17 @@ class DoublyLinkedList:
 
     # Time complexity: O(n)
     def contains(self, element):
-        # Travel to the node that contains the desired element
-        current_node = self.head.next
-        while current_node.value != element and current_node is not self.tail:
-            current_node = current_node.next
-
-        # Element was not found
-        if current_node is self.tail:
-            return False
-
-        return True
+        return self.index() != -1
 
 
     # Time complexity: O(n)
     def clear(self):
-        while self.head.next is not self.tail:
+        while self.head.next is not None:
+            current_node = self.head.next
             self.head.next = self.head.next.next
-            del self.head.next.prev
-            self.head.next.prev = self.head
+            del current_node
 
+        self.dummy_tail.next = None
         self.currentSize = 0
 
 
@@ -291,7 +318,7 @@ class DoublyLinkedList:
 
     # Machine readable representation of this linked list
     def __repr__(self):
-        return str(list(self))
+        return str(self)
 
     # Get the current size of this linked list
     def __len__(self):
@@ -305,12 +332,12 @@ class DoublyLinkedList:
 
     # When adding an object to this linked list ...
     def __add__(self, l2):
-        tempList = DoublyLinkedList()
+        tempList = SinglyLinkedList()
         for el in self:
             tempList.append(el)
 
         # Merge both Linked Lists
-        if isinstance(l2, DoublyLinkedList):
+        if isinstance(l2, SinglyLinkedList):
             for el in l2:
                 tempList.append(el)
         # Otherwise just append the element
@@ -322,10 +349,10 @@ class DoublyLinkedList:
 
     # When adding this linked list to another object ...
     def __radd__(self, l1):
-        tempList = DoublyLinkedList()
+        tempList = SinglyLinkedList()
 
         # Merge both Linked Lists
-        if isinstance(l1, DoublyLinkedList):
+        if isinstance(l1, SinglyLinkedList):
             for el in l1:
                 tempList.append(el)
 
@@ -342,7 +369,7 @@ class DoublyLinkedList:
     # When this linked list is multiplied by an integer, then it should be repeated that amount of time
     def __mul__(self, val):
         if isinstance(val, int):
-            tempList = DoublyLinkedList()
+            tempList = SinglyLinkedList()
 
             # Iterate val amount of times ...
             for i in range(val):
@@ -353,12 +380,12 @@ class DoublyLinkedList:
 
             return tempList
         else:
-            raise TypeError("Can only multiply Doubly Linked List by integers")
+            raise TypeError("Can only multiply Singly Linked List by integers")
 
 
     # When using the [] to get the item:
     def __getitem__(self, param):
-        # Enable the use of negative indices by using modulo and the size of the Doubly Linked List
+        # Enable the use of negative indices by using modulo and the size of the Singly Linked List
         if isinstance(param, int):
             index = param % self.size()
             return self.get(index)
@@ -377,7 +404,7 @@ class DoublyLinkedList:
                 i += 1
 
             # Prepare output linked list
-            output = DoublyLinkedList()
+            output = SinglyLinkedList()
 
             # Append all relevant data to the output linked list
             while i < end:
@@ -392,7 +419,7 @@ class DoublyLinkedList:
 
         # Enable the use of specific tuples or lists of int type indices (O(n log(n) + n * m))
         elif isinstance(param, tuple) or isinstance(param, list) and all(isinstance(el, int) for el in param):
-            tempList = DoublyLinkedList()
+            tempList = SinglyLinkedList()
 
             param = sorted([index % self.size() for index in param])
 
@@ -402,17 +429,17 @@ class DoublyLinkedList:
             return tempList
 
         else:
-            raise TypeError("Can only accept integers or slices as indices for Doubly Linked Lists")
+            raise TypeError("Can only accept integers or slices as indices for Singly Linked Lists")
 
 
     # When using the [] to set the item:
     def __setitem__(self, param, value):
-        # Enable the use of negative indices by using modulo and the size of the Doubly Linked List
+        # Enable the use of negative indices by using modulo and the size of the Singly Linked List
         if isinstance(param, int):
             index = param % self.size()
             self.set(index, value)
         else:
-            raise TypeError("Can only accept integers indices to set values for Doubly Linked Lists")
+            raise TypeError("Can only accept integers indices to set values for Singly Linked Lists")
 
 
     # When using bool() method
@@ -442,5 +469,16 @@ class DoublyLinkedList:
         return self
 
     def __next__(self):
-        if self.iterationNode.next is not self.tail:
-            self.iterationNode = self.iterationNode.
+        if self.iterationNode.next is not None:
+            self.iterationNode = self.iterationNode.next
+            return self.iterationNode.value
+        else:
+            raise StopIteration
+
+if __name__ == "__main__":
+    ll1 = SinglyLinkedList(str)
+    for i in range(65,91):
+        ll1.append(chr(i))
+
+    print(ll1)
+    breakpoint()

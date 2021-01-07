@@ -2,17 +2,35 @@
 # -*- coding: utf-8 -*-
 from DoublyLinkedList import DoublyLinkedList
 
+# Helps with the annotations
+from typing import NoReturn
+
 class Ballot:
-    def __init__(self, text):
+    '''Class that stores ballot information
+
+    Stores all of the information regarding a single ballot. Receives the line of text
+    from the input file from which the ballot information is extracted and stored
+
+    Votes information is stored in a list. The 0th index is not used, but from the 1st
+    index forward each position corresponds to a specific candidate and the value
+    stored in that position is this ballot's rank for that particular candidate
+
+    Attributes:
+        number(int): Stores the ballot number; basically its own id
+        invalid(bool): Indicates if the ballot is invalid or not
+        blank(bool): Indicates if the ballot is blank or not
+        votes(list): Stores the ranks selected for each candidate based on index
+    '''
+    def __init__(self, text: str):
+        # INITIALIZE SOME ATTRIBUTES
         self.number = 0
         self.invalid = False
         self.blank = False
 
-        # Parsing line of text
+        # PARSE LINE OF TEXT
         data = DoublyLinkedList(text.strip().lower().split(","))
-            
-        self.number = int(data[0])
 
+        self.number = int(data[0])
 
         self.votes = DoublyLinkedList(data.size())
 
@@ -20,7 +38,7 @@ class Ballot:
             candidate, rank = el.split(":")
             self.votes[int(candidate)] = int(rank)
 
-        # Validate ballots
+        # VALIDATE BALLOTS
         k = data.size() - 1
 
         for el in self.votes[1:]:
@@ -39,16 +57,44 @@ class Ballot:
                 self.blank = True
 
 
-    def getBallotNum(self):
+    def getBallotNum(self) -> int:
+        '''Return ballot number'''
         return self.number
 
-    def getRankByCandidate(self, candidate):
+
+    def getRankByCandidate(self, candidate: int) -> int:
+        '''Return the rank of the specified candidate
+
+        Args:
+            candidate(int): Id number of the candidate whose rank we want to check
+
+        Returns:
+            rank(int): The corresponding candidate's rank
+        '''
         return self.votes[candidate]
 
-    def getCandidateByRank(self, rank):
+
+    def getCandidateByRank(self, rank: int) -> int:
+        '''Return the candidate that has the specified rank
+
+        Args:
+            rank(int): Specific rank we want to look fro
+
+        Returns:
+            candidate(int): Candidate that has this rank
+        '''
         return self.votes.index(rank)
 
-    def eliminate(self, candidate):
+
+    def eliminate(self, candidate: int) -> NoReturn:
+        '''Eliminates specific candidate from ballot
+
+        First elimintes the candidate and then increases lower candidate's ranks.
+        This way the next iterations will have the most up to date data
+
+        Args:
+            candidate(int): Id of the candidate that will be eliminated
+        '''
         rank = self.getRankByCandidate(candidate)
 
         # "Move up" higher-ranked candidates up one position
@@ -58,16 +104,37 @@ class Ballot:
 
         self.votes[candidate] = 0
 
-    def isInvalid(self):
+    def isInvalid(self) -> bool:
+        '''Getter method for `invalid` attribute
+
+        Returns:
+            invalid(bool): If this ballot is valid or not
+
+        '''
         return self.invalid
 
-    def isBlank(self):
+    def isBlank(self) -> bool:
+        '''Getter method for `blank` attribute
+
+        Returns:
+            blank(bool): If this ballot is blank or not
+        '''
         return self.blank
-    
-    def __str__(self):
+
+    def __str__(self) -> str:
+        '''Returns string representation that helps visualize a summary of this ballot
+
+        Returns:
+            message(str): Ballot number followed by the list of votes
+        '''
         return f'#{self.getBallotNum()} -> {self.votes}'
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        '''Returns string representation that helps visualize a summary of this ballot
+
+        Returns:
+            message(str): Ballot number followed by the list of votes
+        '''
         return f'#{self.getBallotNum()} -> {self.votes}'
 
 
