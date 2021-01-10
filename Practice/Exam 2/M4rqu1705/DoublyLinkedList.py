@@ -447,4 +447,26 @@ class DoublyLinkedList:
             total *= 16777619
             total ^= hash(element)
             # A little extra just to prevent numbers from getting tooo big
-            total
+            total % int(1E19)
+
+        return total
+
+
+    # Iterator methods
+    def __iter__(self):
+        self.iterationNode = self.head
+        return self
+
+    def __next__(self):
+        if self.iterationNode.next is not self.tail:
+            self.iterationNode = self.iterationNode.next
+            return self.iterationNode.value
+        else:
+            raise StopIteration
+
+if __name__ == "__main__":
+    ll1 = DoublyLinkedList(str)
+    for i in range(65,91):
+        ll1.append(chr(i))
+
+    breakpoint()

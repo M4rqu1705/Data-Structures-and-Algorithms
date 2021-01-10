@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from DoublyLinkedList import DoublyLinkedList
 
 class Stack:
 
@@ -90,7 +89,7 @@ class Stack:
     def __str__(self):
         copy = self.copy()
 
-        elements = DoublyLinkedList()
+        elements = list()
 
         while not copy.isEmpty():
             elements.append(copy.pop())

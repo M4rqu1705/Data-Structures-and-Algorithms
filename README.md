@@ -8,6 +8,8 @@ Dr. Manuel Rodríguez Martínez has his ICOM 4035 course and laboratories record
 In order to organize and stream his videos a lot better I made a small website that facilitates surfing through his lectures
 [right here](https://m4rqu1705.github.io/Data-Structures-and-Algorithms/ICOM4025/Videos_Presentations_Custom.html). Just open the file in your browser and ta-da! Access to all his spring 2015 lectures and his presentations.
 
+I am also preparing a little documentation through Sphinx, available [here](https://m4rqu1705.github.io/Data-Structures-and-Algorithms/Implementations/Python/M4rqu105/docs/build/html/index.html)
+
 ##### Textbook: [Data Structures and Algorithms in Java](Data\ Structures\ and\ Algorithms\ in\ Java.pdf)
 
 ### Notes
