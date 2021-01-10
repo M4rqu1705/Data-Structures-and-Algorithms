@@ -5,27 +5,38 @@ from Set import Set
 from Ballot import Ballot
 
 # Helps with the annotations
-import typing as t
+from typing import Collection, List, NoReturn
 
 class Election:
     '''Main program for project 1
 
     Reads data from files and prepares and stores list of sets of ballots. Then, it can determine
-    the winner of the 
+    the winner of the
 
     Attributes:
-        eliminated(set): Contains ids of candidates that were eliminated on previous rounds
-        candidates(list): Contains list of candidate names using their ids as indices for the list
-        ballots_received(int): Stores the total amount of ballots received (includes blank and
-            invalid ballots)
-        invalid_ballots(int): Stores the amount of invalid ballots
-        blank_ballots(int): Stores the amount of blank ballots
-        ballots(list[set[Ballot]]): Stores ballots in sets inside a list. Each set will contain
-            ballots that have the same candidate with rank #1. The specific candidate that has #1
-            across all ballots in that set will be indicated by the set's position within the
-            ballot's list. The index corresponds to the candidate's id
+       eliminated(Set): Contains ids of candidates that were eliminated on previous rounds
+       candidates(DoublyLinkedList): Contains list of candidate names using their ids as indices for the list
+       ballots_received(int): Stores the total amount of ballots received (includes blank and
+          invalid ballots)
+       invalid_ballots(int): Stores the amount of invalid ballots
+       blank_ballots(int): Stores the amount of blank ballots
+       ballots(DoublyLinkedList[Set[Ballot]]): Stores ballots in sets inside a list. Each set will contain
+          ballots that have the same candidate with rank #1. The specific candidate that has #1
+          across all ballots in that set will be indicated by the set's position within the
+          ballot's list. The index corresponds to the candidate's id
     '''
-    def __init__(self, candidates_file: str, ballots_file: str):
+    def __init__(self, candidates_file: str, ballots_file: str) -> NoReturn:
+        '''Extract data from ballots and candidate files
+
+        See :py:meth:`Election.Election.parse_candidate_file` and
+        :py:meth:`Election.Election.parse_ballot_file` for more details as to
+        how this data is processed
+
+        Args:
+           candidates_file(str): File from which candidate data will be extracted
+           ballots_file(str): File from which ballots data will be extracted
+
+        '''
         self.eliminated = Set()
 
         self.parse_candidate_file(candidates_file)
@@ -33,17 +44,19 @@ class Election:
         self.parse_ballot_file(ballots_file)
 
 
-    def parse_candidate_file(self, file_name: str) -> t.NoReturn:
+    def parse_candidate_file(self, file_name: str) -> NoReturn:
         '''Receives candidates file and extracts and stores candidate names in list
 
         The index where each candidate is stored corresponds to that specific candidate's id
 
         Args:
-            file_name(str): Name of the CSV file where the candidate names and ids are stored in the
-                following format:
-                    Candidate1 Name, 1
-                    Candidate2 Name, 2
-                    ...
+           file_name(str): Name of the CSV file where the candidate names and ids are stored
+
+        Note:
+           The format is as follows:
+              - Candidate1 Name, 1
+              - Candidate2 Name, 2
+              - ...
         '''
 
         with open(file_name, "r") as fp:
@@ -58,19 +71,21 @@ class Election:
                 self.candidates[int(candidate_id)] = str(name).strip()
 
 
-    def parse_ballot_file(self, file_name: str) -> t.NoReturn:
+    def parse_ballot_file(self, file_name: str) -> NoReturn:
         '''Receives ballots file and extracts and stores ballots in list of sets
 
         Each line of the ballots file will contain only 1 ballot number followed by its fotes. After
         interpreting the ballots, each ballot is stored in a list of sets. Each ballot in a set in the list
-        belongs to the candidate that has rank #1 within that ballot. 
+        belongs to the candidate that has rank #1 within that ballot.
 
         Args:
-            file_name(str): Name of the CSV file where the ballot number and votes are stored in the
-                following format:
-                    ballot_number_1,candidate:1,candidate:2,...,candidate:k
-                    ballot_number_2,candidate:1,candidate:2,...,candidate:k
-                    ...
+           file_name(str): Name of the CSV file where the ballot number and votes are stored
+
+        Note:
+           The format is as follows:
+              - ballot_number_1,candidate:1,candidate:2,...,candidate:k
+              - ballot_number_2,candidate:1,candidate:2,...,candidate:k
+              - ...
         '''
 
 
@@ -102,19 +117,18 @@ class Election:
                     self.ballots[candidate].add(ballot)
 
 
-    def calculate_amount_votes(self, considered_candidates: t.Collection[int], rank: int) -> t.List[int]:
-        '''Helper function that calculates the amount of votes considered candidates have for a
-            particular rank
+    def calculate_amount_votes(self, considered_candidates: Collection[int], rank: int) -> List[int]:
+        '''Helper function that calculates the amount of votes considered candidates have for a particular rank
 
         Args:
-            considered_candidates(set[int]): The candidate ids for the candidates that are still
-                being considered for the election (i.e. they have not been eliminated)
-            rank(int): The particular rank we want to count votes for
+           considered_candidates(set[int]): The candidate ids for the candidates that are still
+              being considered for the election (i.e. they have not been eliminated)
+           rank(int): The particular rank we want to count votes for
 
         Returns:
-            amount_votes(list[int]): List of votes for each candidate for this particular rank
-
+           amount_votes(list[int]): List of votes for each candidate for this particular rank
         '''
+
         amount_votes = DoublyLinkedList([0]*(self.candidates.size()))
 
         # Iterate through all the candidates' sets
@@ -136,7 +150,7 @@ class Election:
         return amount_votes
 
 
-    def determineWinner(self) -> t.NoReturn:
+    def determineWinner(self) -> NoReturn:
         '''Determine election winner in by eliminating candidates until one has over 50% of #1 votes
 
         Consists of multiple rounds of elimination where if a candidate does not have over 50% of #1
@@ -189,7 +203,7 @@ class Election:
 
             # Flag to check if the loop effectively eliminated a candidate
             eliminated_candidate = False
-            
+
             # Iterate through all k ranks until one candidate is eliminated (will stop early if possible)
             for rank in range(1, self.candidates.size()):
                 amount_per_rank = self.calculate_amount_votes(to_be_eliminated, rank)
@@ -249,7 +263,7 @@ class Election:
             fp.write(file_message)
             print(file_message)
 
-                    
+
 
 if __name__ == "__main__":
     example = Election("candidates.csv", "ballots.csv")

@@ -407,31 +407,47 @@ class DoublyLinkedList:
 
     # When using the [] to set the item:
     def __setitem__(self, param, value):
-        # Enable the use of negative indices by using modulo and the size of the Doubly Linked List
         if isinstance(param, int):
+            # Enable the use of negative indices by using modulo and the size of the Doubly Linked List
             index = param % self.size()
             self.set(index, value)
         else:
             raise TypeError("Can only accept integers indices to set values for Doubly Linked Lists")
 
+    # When using the del operator to delete item
+    def __delitem__(self, param):
+        if isinstance(param, int):
+            # Enable the use of negative indices by using modulo and the size of the Doubly Linked List
+            index = param % self.size()
+            self.delete(index)
+        else:
+            raise TypeError("Can only accept integers indices to delete values for Doubly Linked Lists")
 
     # When using bool() method
     def __bool__(self):
         return not self.isEmpty()
 
-    # Generate hash by multiplying position by hash of the internal elements
-    def __hash__(self):
-        # Will help differentiate lists with same elements in different orders
-        counter = 1
-        # Accumulates the sum of the previous calculation, and will contain the final hash
-        total = 0
+    def __hash__(self) -> int:
+        '''Generate a hash of this Doubly Linked List using `FNV1A hash
+        <https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function>`_
+
+        Makes a copy of this Doubly Linked List and uses FNV1A hash with a little tweak (I
+        use modulo 1E19 just so numbers don't get TOO big)
+
+        Returns:
+            int: This Doubly Linked List's hash code
+
+        Hint:
+            Time complexity: O(n)
+        
+        '''
+        total = 2166136261
 
         for element in self:
-            # counter is squared to distinguish hashes that have similar elements even more
-            total += counter * counter * hash(element)
-            counter += 1
-            # Cap total at a maximum of 1E19 to prevent nubers getting out of hand
-            total %= int(1E19)
+            total *= 16777619
+            total ^= hash(element)
+            # A little extra just to prevent numbers from getting tooo big
+            total % int(1E19)
 
         return total
 

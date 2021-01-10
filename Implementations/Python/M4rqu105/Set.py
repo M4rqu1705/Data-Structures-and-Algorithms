@@ -307,20 +307,29 @@ class Set:
     def __bool__(self):
         return not self.isEmpty()
 
-    # Generate hash by multiplying position by hash of the internal elements
-    def __hash__(self):
-        counter = 1
-        total = 0
+    def __hash__(self) -> int:
+        '''Generate a hash of this Set using `FNV1A hash
+        <https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function>`_
+
+        Makes a copy of this Set and uses FNV1A hash with a little tweak (I
+        use modulo 1E19 just so numbers don't get TOO big)
+
+        Returns:
+            int: This Set's hash code
+
+        Hint:
+            Time complexity: O(n)
+        
+        '''
+        total = 2166136261
+
         for element in self:
-            total += counter * hash(element)
-            counter += 1
+            total *= 16777619
+            total ^= hash(element)
+            # A little extra just to prevent numbers from getting tooo big
+            total % int(1E19)
 
-        # Copied from Bob Jenkin's One-at-a-Time Hash
-        total += (total << 3);
-        total ^= (total >> 11);
-        total += (total << 15);
-
-        return total % int(1E19)
+        return total
 
 
     # Iterator methods

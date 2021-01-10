@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Election module &mdash; M4rqu1705&#39;s Data Structures Implementations 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Set module" href="Set.html" />
+    <link rel="prev" title="DoublyLinkedList module" href="DoublyLinkedList.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> M4rqu1705's Data Structures Implementations
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">M4rqu1705</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Ballot.html">Ballot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DoublyLinkedList.html">DoublyLinkedList module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Election module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Set.html">Set module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">M4rqu1705's Data Structures Implementations</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">M4rqu1705</a> &raquo;</li>
+        
+      <li>Election module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/Election.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-Election">
+<span id="election-module"></span><h1>Election module<a class="headerlink" href="#module-Election" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="Election.Election">
+<em class="property">class </em><code class="sig-prename descclassname">Election.</code><code class="sig-name descname">Election</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">candidates_file</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">ballots_file</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Election.Election" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Main program for project 1</p>
+<p>Reads data from files and prepares and stores list of sets of ballots. Then, it can determine
+the winner of the</p>
+<dl class="py attribute">
+<dt id="Election.Election.eliminated">
+<code class="sig-name descname">eliminated</code><a class="headerlink" href="#Election.Election.eliminated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains ids of candidates that were eliminated on previous rounds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="Set.html#Set.Set" title="Set.Set">Set</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Election.Election.candidates">
+<code class="sig-name descname">candidates</code><a class="headerlink" href="#Election.Election.candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains list of candidate names using their ids as indices for the list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="DoublyLinkedList.html#DoublyLinkedList.DoublyLinkedList" title="DoublyLinkedList.DoublyLinkedList">DoublyLinkedList</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Election.Election.ballots_received">
+<code class="sig-name descname">ballots_received</code><a class="headerlink" href="#Election.Election.ballots_received" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the total amount of ballots received (includes blank and
+invalid ballots)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Election.Election.invalid_ballots">
+<code class="sig-name descname">invalid_ballots</code><a class="headerlink" href="#Election.Election.invalid_ballots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the amount of invalid ballots</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Election.Election.blank_ballots">
+<code class="sig-name descname">blank_ballots</code><a class="headerlink" href="#Election.Election.blank_ballots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the amount of blank ballots</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Election.Election.ballots">
+<code class="sig-name descname">ballots</code><a class="headerlink" href="#Election.Election.ballots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores ballots in sets inside a list. Each set will contain
+ballots that have the same candidate with rank #1. The specific candidate that has #1
+across all ballots in that set will be indicated by the set’s position within the
+ballot’s list. The index corresponds to the candidate’s id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="DoublyLinkedList.html#DoublyLinkedList.DoublyLinkedList" title="DoublyLinkedList.DoublyLinkedList">DoublyLinkedList</a>[<a class="reference internal" href="Set.html#Set.Set" title="Set.Set">Set</a>[<a class="reference internal" href="Ballot.html#Ballot.Ballot" title="Ballot.Ballot">Ballot</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Election.Election.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">candidates_file</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">ballots_file</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; NoReturn<a class="headerlink" href="#Election.Election.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract data from ballots and candidate files</p>
+<p>See <a class="reference internal" href="#Election.Election.parse_candidate_file" title="Election.Election.parse_candidate_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Election.Election.parse_candidate_file()</span></code></a> and
+<a class="reference internal" href="#Election.Election.parse_ballot_file" title="Election.Election.parse_ballot_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Election.Election.parse_ballot_file()</span></code></a> for more details as to
+how this data is processed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>candidates_file</strong> (<em>str</em>) – File from which candidate data will be extracted</p></li>
+<li><p><strong>ballots_file</strong> (<em>str</em>) – File from which ballots data will be extracted</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Election.Election.calculate_amount_votes">
+<code class="sig-name descname">calculate_amount_votes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">considered_candidates</span><span class="p">:</span> <span class="n">Collection<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">rank</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>int<span class="p">]</span><a class="headerlink" href="#Election.Election.calculate_amount_votes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function that calculates the amount of votes considered candidates have for a particular rank</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>considered_candidates</strong> (<em>set</em><em>[</em><em>int</em><em>]</em>) – The candidate ids for the candidates that are still
+being considered for the election (i.e. they have not been eliminated)</p></li>
+<li><p><strong>rank</strong> (<em>int</em>) – The particular rank we want to count votes for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of votes for each candidate for this particular rank</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>amount_votes(list[int])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Election.Election.determineWinner">
+<code class="sig-name descname">determineWinner</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; NoReturn<a class="headerlink" href="#Election.Election.determineWinner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine election winner in by eliminating candidates until one has over 50% of #1 votes</p>
+<p>Consists of multiple rounds of elimination where if a candidate does not have over 50% of #1
+votes, a candidate will be eliminated. The candidate with the least amount of votes for rank
+#1 will be eliminated. If there’s a tie, the candidate with the least amount of votes for
+rank #2 will be eliminated. etc.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Election.Election.parse_ballot_file">
+<code class="sig-name descname">parse_ballot_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; NoReturn<a class="headerlink" href="#Election.Election.parse_ballot_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives ballots file and extracts and stores ballots in list of sets</p>
+<p>Each line of the ballots file will contain only 1 ballot number followed by its fotes. After
+interpreting the ballots, each ballot is stored in a list of sets. Each ballot in a set in the list
+belongs to the candidate that has rank #1 within that ballot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – Name of the CSV file where the ballot number and votes are stored</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>The format is as follows:</dt><dd><ul class="simple">
+<li><p>ballot_number_1,candidate:1,candidate:2,…,candidate:k</p></li>
+<li><p>ballot_number_2,candidate:1,candidate:2,…,candidate:k</p></li>
+<li><p>…</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Election.Election.parse_candidate_file">
+<code class="sig-name descname">parse_candidate_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; NoReturn<a class="headerlink" href="#Election.Election.parse_candidate_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives candidates file and extracts and stores candidate names in list</p>
+<p>The index where each candidate is stored corresponds to that specific candidate’s id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – Name of the CSV file where the candidate names and ids are stored</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>The format is as follows:</dt><dd><ul class="simple">
+<li><p>Candidate1 Name, 1</p></li>
+<li><p>Candidate2 Name, 2</p></li>
+<li><p>…</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Set.html" class="btn btn-neutral float-right" title="Set module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="DoublyLinkedList.html" class="btn btn-neutral float-left" title="DoublyLinkedList module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, M4rqu1705.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -5,23 +5,35 @@ from DoublyLinkedList import DoublyLinkedList
 # Helps with the annotations
 from typing import NoReturn
 
+'''Class that stores ballot information
+
+Stores all of the information regarding a single ballot. Receives the line of text
+from the input file from which the ballot information is extracted and stored
+
+Votes information is stored in a list. The 0th index is not used, but from the 1st
+index forward each position corresponds to a specific candidate and the value
+stored in that position is this ballot's rank for that particular candidate
+
+Attributes:
+   number(int): Stores the ballot number; basically its own id
+   invalid(bool): Indicates if the ballot is invalid or not
+   blank(bool): Indicates if the ballot is blank or not
+   votes(list): Stores the ranks selected for each candidate based on index
+
+'''
 class Ballot:
-    '''Class that stores ballot information
+    def __init__(self, text: str) -> NoReturn:
+        '''Constructor for Ballot class
 
-    Stores all of the information regarding a single ballot. Receives the line of text
-    from the input file from which the ballot information is extracted and stored
+        Processes and parses text in order to extract the relevant information
+        and store it in a Doubly-Linked List. Additionally initializes
+        attributes and determines if vote is blank or invalid
 
-    Votes information is stored in a list. The 0th index is not used, but from the 1st
-    index forward each position corresponds to a specific candidate and the value
-    stored in that position is this ballot's rank for that particular candidate
+        Args:
+          text(str): Line of the ballots.csv from which votes and ballot number
+             will be extracted
+        '''
 
-    Attributes:
-        number(int): Stores the ballot number; basically its own id
-        invalid(bool): Indicates if the ballot is invalid or not
-        blank(bool): Indicates if the ballot is blank or not
-        votes(list): Stores the ranks selected for each candidate based on index
-    '''
-    def __init__(self, text: str):
         # INITIALIZE SOME ATTRIBUTES
         self.number = 0
         self.invalid = False
@@ -58,7 +70,12 @@ class Ballot:
 
 
     def getBallotNum(self) -> int:
-        '''Return ballot number'''
+        '''Return ballot number
+
+        Returns:
+          number(int): Ballot number (which serves as an id)
+        '''
+
         return self.number
 
 
@@ -66,11 +83,12 @@ class Ballot:
         '''Return the rank of the specified candidate
 
         Args:
-            candidate(int): Id number of the candidate whose rank we want to check
+           candidate(int): Id number of the candidate whose rank we want to check
 
         Returns:
-            rank(int): The corresponding candidate's rank
+           rank(int): The corresponding candidate's rank
         '''
+
         return self.votes[candidate]
 
 
@@ -78,11 +96,12 @@ class Ballot:
         '''Return the candidate that has the specified rank
 
         Args:
-            rank(int): Specific rank we want to look fro
+           rank(int): Specific rank we want to look fro
 
         Returns:
-            candidate(int): Candidate that has this rank
+           candidate(int): Candidate that has this rank
         '''
+
         return self.votes.index(rank)
 
 
@@ -93,8 +112,9 @@ class Ballot:
         This way the next iterations will have the most up to date data
 
         Args:
-            candidate(int): Id of the candidate that will be eliminated
+           candidate(int): Id of the candidate that will be eliminated
         '''
+
         rank = self.getRankByCandidate(candidate)
 
         # "Move up" higher-ranked candidates up one position
@@ -108,9 +128,9 @@ class Ballot:
         '''Getter method for `invalid` attribute
 
         Returns:
-            invalid(bool): If this ballot is valid or not
-
+           invalid(bool): If this ballot is valid or not
         '''
+
         return self.invalid
 
     def isBlank(self) -> bool:
@@ -119,6 +139,7 @@ class Ballot:
         Returns:
             blank(bool): If this ballot is blank or not
         '''
+
         return self.blank
 
     def __str__(self) -> str:
@@ -127,6 +148,7 @@ class Ballot:
         Returns:
             message(str): Ballot number followed by the list of votes
         '''
+
         return f'#{self.getBallotNum()} -> {self.votes}'
 
     def __repr__(self) -> str:
@@ -135,6 +157,7 @@ class Ballot:
         Returns:
             message(str): Ballot number followed by the list of votes
         '''
+
         return f'#{self.getBallotNum()} -> {self.votes}'
 
 

@@ -169,67 +169,468 @@
 <span id="bag-module"></span><h1>Bag module<a class="headerlink" href="#module-Bag" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="Bag.Bag">
-<em class="property">class </em><code class="sig-prename descclassname">Bag.</code><code class="sig-name descname">Bag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataType</span></em>, <em class="sig-param"><span class="n">initial_capacity</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">Bag.</code><code class="sig-name descname">Bag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">param</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Multiset Data Structure</p>
+<div class="line-block">
+<div class="line">Unordered collection of elements where repetitions are allowed.</div>
+<div class="line"><br /></div>
+<div class="line">Implemented as an Array List that gets expanded as needed</div>
+</div>
+<dl class="py attribute">
+<dt id="Bag.Bag.current_size">
+<code class="sig-name descname">current_size</code><a class="headerlink" href="#Bag.Bag.current_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores how many elements are in the bag</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Bag.Bag.array_list">
+<code class="sig-name descname">array_list</code><a class="headerlink" href="#Bag.Bag.array_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>ArrayList Data Structure that contains the data from bag</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Bag.Bag.__add__">
+<code class="sig-name descname">__add__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">b2</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#Bag.Bag.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge bag and iterator</p>
+<p>When this bag is added with an iterator, merge both into bag. Otherwise,
+simply add element to bag</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>any</strong> – Iterator to merge with bag or element to add to it</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Bag after merging iterator or element added</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#Bag.Bag" title="Bag.Bag">Bag</a></p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n + m)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Bag.Bag.__bool__">
+<code class="sig-name descname">__bool__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#Bag.Bag.__bool__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simply calls this bag’s isEmpty method and negates it</p>
+<p>See <a class="reference internal" href="#Bag.Bag.isEmpty" title="Bag.Bag.isEmpty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Bag.Bag.isEmpty()</span></code></a> for more information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if bag is NOT empty</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(1)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Bag.Bag.__contains__">
+<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">el</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#Bag.Bag.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simply calls this bag’s contains method</p>
+<p>See <a class="reference internal" href="#Bag.Bag.contains" title="Bag.Bag.contains"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Bag.Bag.contains()</span></code></a> for more details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if element is inside bag</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Bag.Bag.__hash__">
+<code class="sig-name descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#Bag.Bag.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a hash of this Bag using <a class="reference external" href="https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function">FNV1A hash</a></p>
+<p>Makes a copy of this Bag and uses FNV1A hash with a little tweak (I
+use modulo 1E19 just so numbers don’t get TOO big)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>This Bag’s hash code</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Bag.Bag.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">param</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; NoReturn<a class="headerlink" href="#Bag.Bag.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bag constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>any</strong> – integer, Bag or iterator that is used to populate the bag’s array list</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>TypeError</strong> – Occurs when param is not an integer, iterator nor other Bag</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bag1</span> <span class="o">=</span> <span class="n">Bag</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag1</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag2</span> <span class="o">=</span> <span class="n">Bag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag2</span>
+<span class="go">[1,2,3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag3</span> <span class="o">=</span> <span class="n">Bag</span><span class="p">(</span><span class="n">bag2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag3</span>
+<span class="go">[1,2,3]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Bag.Bag.__len__">
+<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#Bag.Bag.__len__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simply calls this bag’s size method</p>
+<p>See <a class="reference internal" href="#Bag.Bag.size" title="Bag.Bag.size"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Bag.Bag.size()</span></code></a> for more details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Length of bag</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(1)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Bag.Bag.__repr__">
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#Bag.Bag.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Machine-readable representation of this bag</p>
+<p>Simply calls bag’s <a class="reference internal" href="#Bag.Bag.__str__" title="Bag.Bag.__str__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Bag.Bag.__str__()</span></code></a> method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Machine-readable representation of bag</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Bag.Bag.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#Bag.Bag.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>String representation of this bag</p>
+<p>Simply iterates through bag and appends elements to list. Then converts
+list to string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>String representation of bag</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
 <dl class="py method">
 <dt id="Bag.Bag.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.add" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; NoReturn<a class="headerlink" href="#Bag.Bag.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds new element</p>
+<p>Before adding element, expand array list if necessary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>any</strong> – The element to be added to Bag</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if operation was successful</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span> <span class="o">=</span> <span class="n">Bag</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span>
+<span class="go">[0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span>
+<span class="go">[0, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span>
+<span class="go">[0, 3, 10]</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<div class="line-block">
+<div class="line">Average Time complexity: O(1)</div>
+<div class="line">Worst-case Time complexity: O(n)</div>
+</div>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Bag.Bag.capacity">
-<code class="sig-name descname">capacity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.capacity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">capacity</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#Bag.Bag.capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get bag size</p>
+<p>Returns the maximum amount of elements this bag’s array list can hold</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Capacity of bag</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(1)</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Bag.Bag.clear">
-<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.clear" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; NoReturn<a class="headerlink" href="#Bag.Bag.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear bag</p>
+<p>Simply delete the array_list followed by making a new array_list with
+the same capacity as before filled with “None”</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span> <span class="o">=</span> <span class="n">Bag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span>
+<span class="go">[1, 2, 3, 4, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Bag.Bag.contains">
-<code class="sig-name descname">contains</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.contains" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">contains</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#Bag.Bag.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test for element membership</p>
+<p>Checks if the passed element is inside this bag. Implemented with Linear Search</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>any</strong> – Element that is looked for in bag</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if element is inside bag</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span> <span class="o">=</span> <span class="n">Bag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Bag.Bag.contract">
-<code class="sig-name descname">contract</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.contract" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">contract</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; NoReturn<a class="headerlink" href="#Bag.Bag.contract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contract array list capacity with which the Bag is implemented</p>
+<p>Halves the capacity of the array list by making a new Bag, adding all this
+bag’s elements to the new Bag and, copying the new bag’s array list to this
+one</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Bag.Bag.count">
-<code class="sig-name descname">count</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.count" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">count</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#Bag.Bag.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count copies of element</p>
+<p>Perform Linear Search and add to counter when element is found</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>any</strong> – Value whose count will be found</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Amount of times element was found</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span> <span class="o">=</span> <span class="n">Bag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Bag.Bag.expand">
-<code class="sig-name descname">expand</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.expand" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">expand</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; NoReturn<a class="headerlink" href="#Bag.Bag.expand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand array list capacity with which the Bag is implemented</p>
+<p>Duplicates the capacity of the array list by making a new Bag, adding all this
+bag’s elements to the new Bag and, copying the new bag’s array list to this
+one</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Bag.Bag.isEmpty">
-<code class="sig-name descname">isEmpty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.isEmpty" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">isEmpty</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#Bag.Bag.isEmpty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if empty</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if bag is empty</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(1)</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Bag.Bag.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.remove" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#Bag.Bag.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a copy of an element</p>
+<p>It will specifically remove the first copy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>any</strong> – The element to be removed from the bag</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if operation was successful</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span> <span class="o">=</span> <span class="n">Bag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span>
+<span class="go">[1, 5, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span>
+<span class="go">[3, 5]</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Bag.Bag.remove_all">
-<code class="sig-name descname">remove_all</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.remove_all" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">remove_all</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#Bag.Bag.remove_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all copies of an element</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>any</strong> – The value of the elements to be removed from the bag</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Amount of elements removed from Bag</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span> <span class="o">=</span> <span class="n">Bag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span><span class="o">.</span><span class="n">remove_all</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span><span class="o">.</span><span class="n">remove_all</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bag</span>
+<span class="go">[1, 3, 5]</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="Bag.Bag.size">
-<code class="sig-name descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.size" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="Bag.Bag.validElement">
-<code class="sig-name descname">validElement</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bag.Bag.validElement" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#Bag.Bag.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get bag size</p>
+<p>Returns the actual amount of elements Bag has</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>length of bag</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(1)</p>
+</div>
+</dd></dl>
 
 </dd></dl>
 

@@ -135,6 +135,33 @@ class Stack:
             raise TypeError("Can only add stacks with stacks")
 
 
+    def __hash__(self) -> int:
+        '''Generate a hash of this Stack using `FNV1A hash
+        <https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function>`_
+
+        Makes a copy of this Stack and uses FNV1A hash with a little tweak (I
+        use modulo 1E19 just so numbers don't get TOO big)
+
+        Returns:
+            int: This Stack's hash code
+
+        Hint:
+            Time complexity: O(n)
+        
+        '''
+        total = 2166136261
+            
+        copy = self.copy()
+
+        while not copy.isEmpty():
+            total *= 16777619
+            total ^= hash(copy.pop())
+            # A little extra just to prevent numbers from getting tooo big
+            total % int(1E19)
+
+        return total
+
+
 if __name__ == "__main__":
     pesante_rosa = Stack()
     pesante_rosa.push("Maribel")

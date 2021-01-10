@@ -176,6 +176,26 @@ operations increases to O(n) to O(n²)</p>
 <em class="property">class </em><code class="sig-prename descclassname">Set.</code><code class="sig-name descname">Set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">param</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Set.Set" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
+<dt id="Set.Set.__hash__">
+<code class="sig-name descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#Set.Set.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a hash of this Set using <a class="reference external" href="https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function">FNV1A hash</a></p>
+<p>Makes a copy of this Set and uses FNV1A hash with a little tweak (I
+use modulo 1E19 just so numbers don’t get TOO big)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>This Set’s hash code</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt id="Set.Set.add">
 <code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Set.Set.add" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
