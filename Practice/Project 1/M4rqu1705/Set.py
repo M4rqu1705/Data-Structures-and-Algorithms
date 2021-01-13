@@ -1,34 +1,61 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-'''
-This Python script implements a set using hashes.
 
-It does it's best for the average time complexity to be O(1) to O(n) for most of the operations
+using_primes = True
 
-For the worst case scenarios (where there are hash collisions), the time complexity for those
-operations increases to O(n) to O(n²)
+# Customized primes generator comprehension
+def primes():
+    yield 1
+    yield 2
+    yield 3
+    yield 5
+    yield 7
+    i = 9
+    while True:
+        isPrime = True
 
-'''
+        # Simple sqrt approximation (https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Bakhshali_method)
+        end = ((i*i + 24*i + 16)/(8*i + 32))
+        end = int(end) + 1
+
+        for j in range(3, end):
+            if i % j == 0:
+                isPrime = False
+                break
+
+        if isPrime:
+            yield i
+        i += 2
 
 
 DEFAULT_SIZE = 10
 
 class Set:
+    '''
+    This Python script implements a set using hashes.
+
+    It does it's best for the average time complexity to be O(1) to O(n) for most of the operations
+
+    For the worst case scenarios (where there are hash collisions), the time complexity for those
+    operations increases to O(n) to O(n²)
+
+    '''
     def __init__(self, param = None):
-        self.currentSize = 0
+        self.current_size = 0
+        self.primes_generator = primes()
 
         # By default the method will simply make an empty set with the default capacity
         if param is None:
-            self.mySet = [None] * DEFAULT_SIZE
+            self.array_list = [None] * DEFAULT_SIZE
 
         # If param is an integer, we can use it as the initial set capacity
         elif isinstance(param, int):
-            self.mySet = [None] * param
+            self.array_list = [None] * param
 
         # Finally, if param is anything else, assume it is an iterator and try to populate the set
         # with its data
         else:
-            self.mySet = [None] * DEFAULT_SIZE
+            self.array_list = [None] * DEFAULT_SIZE
             try:
                 iter(param)
                 for element in param:
@@ -39,19 +66,23 @@ class Set:
                 pass
 
 
-    # 🔧🔨⛏ HELPER FUNCTIONS ⚙🛠⚒
-
     # Time complexity: O(n)
     def expand(self):
-        # Make new set twice the size of this set
-        tempSet = Set(self.capacity() * 2)
+        if using_primes:
+            new_capacity = next(self.primes_generator)
+            while (new_capacity <= self.capacity()):
+                new_capacity = next(self.primes_generator)
+        else:
+            new_capacity = self.capacity() * 2
+
+        tempSet = Set(new_capacity)
 
         # Add every element from this set to the new set
         for el in self:
             tempSet.add(el)
 
-        # Reassign mySet to be the new Set's set
-        self.mySet = tempSet.mySet[:]
+        # Reassign array_list to be the new Set's set
+        self.array_list = tempSet.array_list[:]
 
 
     # Time complexity: O(n)
@@ -63,12 +94,9 @@ class Set:
         for el in self:
             tempSet.add(el)
 
-        # Reassign mySet to be the new Set's set
-        self.mySet = tempSet.mySet[:]
+        # Reassign array_list to be the new Set's set
+        self.array_list = tempSet.array_list[:]
 
-
-
-    # 👜🎒 SET ADT METHOD 💼🏎
 
     # Average-case time complexity: O(1)
     # Worst-case time complexity: O(n)
@@ -77,13 +105,14 @@ class Set:
         position = hash(element) % self.capacity()
 
         # If the element was sucessfully found:
-        if self.mySet[position] == element:
+        if self.array_list[position] == element:
             return True
 
         # Otherwise
         else:
+            print("Colission!")
             # Perform linear search to look for the element
-            return element in self.mySet
+            return element in self.array_list
 
 
     # Average-case time complexity: O(1)
@@ -93,26 +122,30 @@ class Set:
         if element in self:
             return False
 
-        # Expand set whenever it's ggth is close to getting to half it's capacity
-        if self.size() + 1 > self.capacity() // 2:
-            self.expand()
+        if using_primes:
+            if self.size() + 1 > self.capacity() * 0.7:
+                self.expand()
+        else:
+            if self.size() + 1 > self.capacity() * 0.5:
+                self.expand()
+
 
         # Make hash and divide it modulo the set's ggth in order to find it's position
         position = hash(element) % self.capacity()
 
         # If the element was not found:
-        if self.mySet[position] is None:
-            self.mySet[position] = element
-            self.currentSize += 1
+        if self.array_list[position] is None:
+            self.array_list[position] = element
+            self.current_size += 1
             return True
 
         # Otherwise ...
         else:
             # Perform linear search until empty slot is found
             for i in range(self.capacity()):
-                if self.mySet[i] is None:
-                    self.mySet[i] = element
-                    self.currentSize += 1
+                if self.array_list[i] is None:
+                    self.array_list[i] = element
+                    self.current_size += 1
                     return True
 
 
@@ -131,18 +164,18 @@ class Set:
         position = hash(element) % self.capacity()
 
         # If the element was found:
-        if self.mySet[position] == element:
-            self.mySet[position] = None
-            self.currentSize -= 1
+        if self.array_list[position] == element:
+            self.array_list[position] = None
+            self.current_size -= 1
             return True
 
         # Otherwise ...
         else:
             # Perform linear search until element is found
             for i in range(self.capacity()):
-                if self.mySet[i] == element:
-                    self.mySet[i] = None
-                    self.currentSize -= 1
+                if self.array_list[i] == element:
+                    self.array_list[i] = None
+                    self.current_size -= 1
                     return True
 
             return False
@@ -154,11 +187,11 @@ class Set:
         capacity = self.capacity()
 
         # Delete set
-        del self.mySet
+        del self.array_list
 
         # Create new one with the previous capacity, but none of the elements
-        self.mySet = [None] * capacity
-        self.currentSize = 0
+        self.array_list = [None] * capacity
+        self.current_size = 0
 
         return True
 
@@ -166,13 +199,19 @@ class Set:
     # Equivalent to the length (or the amount of actual elements it has)
     # Time complexity: O(1)
     def size(self):
-        return self.currentSize
+        return self.current_size
 
 
     # Equivalent to how many elements it would be able to hold
     # Time complexity: O(1)
     def capacity(self):
-        return len(self.mySet)
+        return len(self.array_list)
+
+
+    # Equivalent to the size / capacity ratio
+    # Time complexity: O(1)
+    def load_factor(self):
+        return self.size() / self.capacity()
 
 
     # Time complexity: O(1)
@@ -253,7 +292,7 @@ class Set:
 
     # Get the current size of this set
     def __len__(self):
-        return self.currentSize
+        return self.current_size
 
     # Machine readable representation of this set
     def __repr__(self):
@@ -340,30 +379,38 @@ class Set:
     def __next__(self):
         while self.iterationIndex < self.capacity():
             self.iterationIndex += 1
-            if self.mySet[self.iterationIndex - 1] is None:
+            if self.array_list[self.iterationIndex - 1] is None:
                 continue
             else:
-                return self.mySet[self.iterationIndex - 1]
+                return self.array_list[self.iterationIndex - 1]
 
         raise StopIteration
 
+
 if __name__ == "__main__":
     set1 = Set()
-    for i in range(65,91):
+    for i in range(65,159):
+        # Using ascii characters
         set1.add(chr(i))
+        # Using only the numbers
+        set1.add(i)
+        # Using a sequence of consecutive ascii characters
+        set1.add(str(chr(i) + chr(i+1)))
 
-    set2 = Set()
-    for i in range(65,91):
-        set2.add(chr(i))
+    #  set2 = Set()
+    #  for i in range(65,91):
+        #  set2.add(chr(i))
 
-    set3 = Set()
-    for i in range(65,70):
-        set3.add(chr(i))
+    #  set3 = Set()
+    #  for i in range(65,70):
+        #  set3.add(chr(i))
 
-    set4 = Set()
-    for i in range(70,91):
-        set4.add(chr(i))
+    #  set4 = Set()
+    #  for i in range(70,91):
+        #  set4.add(chr(i))
 
+    print('---')
     for el in set1:
-        print(el)
-    #  breakpoint()
+        set1.contains(el)
+
+    breakpoint()

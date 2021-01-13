@@ -114,7 +114,6 @@ class Ballot:
         Args:
            candidate(int): Id of the candidate that will be eliminated
         '''
-
         rank = self.getRankByCandidate(candidate)
 
         # "Move up" higher-ranked candidates up one position

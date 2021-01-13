@@ -183,6 +183,7 @@ class Election:
             total = sum(temp)
 
             for i in range(1, amount_1s.size()):
+
                 if amount_1s[i] is not None and total // 2 < amount_1s[i]:
                     file_message += f"Winner: {self.candidates[i]} wins with {amount_1s[i]} 1's\n"
                     winner_found = True
@@ -216,7 +217,6 @@ class Election:
                 for candidate in to_be_eliminated:
                     considered_amounts.append(amount_per_rank[candidate])
                 min_votes = min(considered_amounts)
-
 
                 # If there are NO REPETITIONS as to which candidate has the least amount of votes ... Eliminate!
                 if considered_amounts.index(min_votes) == considered_amounts.last_index(min_votes):
@@ -258,6 +258,7 @@ class Election:
                 file_message += f"Round #{round_number}: {self.candidates[candidate]} was eliminated with {amount_1s[candidate]} 1's\n"
 
             round_number += 1
+
 
         with open("results.txt", "w+") as fp:
             fp.write(file_message)

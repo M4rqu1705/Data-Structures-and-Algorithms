@@ -100,7 +100,6 @@ class ThreadedSinglyLinkedList:
         # The list size is decreased, so the currentSize should reflect that too
         self.currentSize -= 1
 
-
         return True
 
 
