@@ -162,9 +162,13 @@
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#K"><strong>K</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#Q"><strong>Q</strong></a>
  | <a href="#R"><strong>R</strong></a>
@@ -182,7 +186,15 @@
       <li><a href="Bag.html#Bag.Bag.__bool__">__bool__() (Bag.Bag method)</a>
 </li>
       <li><a href="Bag.html#Bag.Bag.__contains__">__contains__() (Bag.Bag method)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.__contains__">(HashMaps.OpenAddressing method)</a>
 </li>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.__contains__">(HashMaps.SeparateChaining method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.__contains__">(Map.Map method)</a>
+</li>
+      </ul></li>
       <li><a href="Bag.html#Bag.Bag.__hash__">__hash__() (Bag.Bag method)</a>
 
       <ul>
@@ -210,12 +222,24 @@
       <li><a href="Bag.html#Bag.Bag.__repr__">__repr__() (Bag.Bag method)</a>
 
       <ul>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.__repr__">(HashMaps.OpenAddressing method)</a>
+</li>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.__repr__">(HashMaps.SeparateChaining method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.__repr__">(Map.Map method)</a>
+</li>
         <li><a href="Queue.html#Queue.Queue.__repr__">(Queue.Queue method)</a>
 </li>
       </ul></li>
       <li><a href="Bag.html#Bag.Bag.__str__">__str__() (Bag.Bag method)</a>
 
       <ul>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.__str__">(HashMaps.OpenAddressing method)</a>
+</li>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.__str__">(HashMaps.SeparateChaining method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.__str__">(Map.Map method)</a>
+</li>
         <li><a href="Queue.html#Queue.Queue.__str__">(Queue.Queue method)</a>
 </li>
       </ul></li>
@@ -235,6 +259,8 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.SeparateChaining.amount_buckets">amount_buckets() (HashMaps.SeparateChaining method)</a>
+</li>
       <li><a href="DoublyLinkedList.html#DoublyLinkedList.DoublyLinkedList.append">append() (DoublyLinkedList.DoublyLinkedList method)</a>
 
       <ul>
@@ -256,12 +282,18 @@
         <li><a href="Bag.html#module-Bag">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="Bag.html#Bag.Bag">Bag (class in Bag)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="InefficientSet.html#InefficientSet.Set.binarySearch">binarySearch() (InefficientSet.Set static method)</a>
 </li>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.buckets">buckets (HashMaps.OpenAddressing attribute)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.buckets">(HashMaps.SeparateChaining attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -271,6 +303,8 @@
       <li><a href="Bag.html#Bag.Bag.capacity">capacity() (Bag.Bag method)</a>
 
       <ul>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.capacity">(HashMaps.OpenAddressing method)</a>
+</li>
         <li><a href="Queue.html#Queue.Queue.capacity">(Queue.Queue method)</a>
 </li>
         <li><a href="Set.html#Set.Set.capacity">(Set.Set method)</a>
@@ -283,7 +317,13 @@
       <ul>
         <li><a href="DoublyLinkedList.html#DoublyLinkedList.DoublyLinkedList.clear">(DoublyLinkedList.DoublyLinkedList method)</a>
 </li>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.clear">(HashMaps.OpenAddressing method)</a>
+</li>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.clear">(HashMaps.SeparateChaining method)</a>
+</li>
         <li><a href="InefficientSet.html#InefficientSet.Set.clear">(InefficientSet.Set method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.clear">(Map.Map method)</a>
 </li>
         <li><a href="Queue.html#Queue.Queue.clear">(Queue.Queue method)</a>
 </li>
@@ -294,8 +334,6 @@
         <li><a href="Stack.html#Stack.Stack.clear">(Stack.Stack method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="Bag.html#Bag.Bag.contains">contains() (Bag.Bag method)</a>
 
       <ul>
@@ -308,15 +346,29 @@
         <li><a href="SinglyLinkedList.html#SinglyLinkedList.SinglyLinkedList.contains">(SinglyLinkedList.SinglyLinkedList method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.containsKey">containsKey() (HashMaps.OpenAddressing method)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.containsKey">(HashMaps.SeparateChaining method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.containsKey">(Map.Map method)</a>
+</li>
+      </ul></li>
       <li><a href="Bag.html#Bag.Bag.contract">contract() (Bag.Bag method)</a>
 
       <ul>
         <li><a href="Set.html#Set.Set.contract">(Set.Set method)</a>
 </li>
       </ul></li>
-      <li><a href="Queue.html#Queue.Queue.copy">copy() (Queue.Queue method)</a>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.copy">copy() (HashMaps.OpenAddressing method)</a>
 
       <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.copy">(HashMaps.SeparateChaining method)</a>
+</li>
+        <li><a href="Queue.html#Queue.Queue.copy">(Queue.Queue method)</a>
+</li>
         <li><a href="Stack.html#Stack.Stack.copy">(Stack.Stack method)</a>
 </li>
       </ul></li>
@@ -325,6 +377,10 @@
       <li><a href="Bag.html#Bag.Bag.current_size">current_size (Bag.Bag attribute)</a>
 
       <ul>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.current_size">(HashMaps.OpenAddressing attribute)</a>
+</li>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.current_size">(HashMaps.SeparateChaining attribute)</a>
+</li>
         <li><a href="Queue.html#Queue.Queue.current_size">(Queue.Queue attribute)</a>
 </li>
       </ul></li>
@@ -371,11 +427,13 @@
 </li>
       <li><a href="Queue.html#Queue.Queue.enqueue">enqueue() (Queue.Queue method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="Bag.html#Bag.Bag.expand">expand() (Bag.Bag method)</a>
 
       <ul>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.expand">(HashMaps.OpenAddressing method)</a>
+</li>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.expand">(HashMaps.SeparateChaining method)</a>
+</li>
         <li><a href="Queue.html#Queue.Queue.expand">(Queue.Queue method)</a>
 </li>
         <li><a href="Set.html#Set.Set.expand">(Set.Set method)</a>
@@ -398,6 +456,12 @@
       <li><a href="DoublyLinkedList.html#DoublyLinkedList.DoublyLinkedList.get">get() (DoublyLinkedList.DoublyLinkedList method)</a>
 
       <ul>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.get">(HashMaps.OpenAddressing method)</a>
+</li>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.get">(HashMaps.SeparateChaining method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.get">(Map.Map method)</a>
+</li>
         <li><a href="SinglyLinkedList.html#SinglyLinkedList.SinglyLinkedList.get">(SinglyLinkedList.SinglyLinkedList method)</a>
 </li>
       </ul></li>
@@ -413,6 +477,35 @@
 
       <ul>
         <li><a href="SinglyLinkedList.html#SinglyLinkedList.SinglyLinkedList.get_last">(SinglyLinkedList.SinglyLinkedList method)</a>
+</li>
+      </ul></li>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.getKeys">getKeys() (HashMaps.OpenAddressing method)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.getKeys">(HashMaps.SeparateChaining method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.getKeys">(Map.Map method)</a>
+</li>
+      </ul></li>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.getValues">getValues() (HashMaps.OpenAddressing method)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.getValues">(HashMaps.SeparateChaining method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.getValues">(Map.Map method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    HashMaps
+
+      <ul>
+        <li><a href="HashMaps.html#module-HashMaps">module</a>
 </li>
       </ul></li>
   </ul></td>
@@ -446,14 +539,20 @@
         <li><a href="Set.html#Set.Set.intersection">(Set.Set method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.BN.inUse">inUse (HashMaps.OpenAddressing.BN attribute)</a>
+</li>
       <li><a href="Bag.html#Bag.Bag.isEmpty">isEmpty() (Bag.Bag method)</a>
 
       <ul>
         <li><a href="DoublyLinkedList.html#DoublyLinkedList.DoublyLinkedList.isEmpty">(DoublyLinkedList.DoublyLinkedList method)</a>
 </li>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.isEmpty">(HashMaps.OpenAddressing method)</a>
+</li>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.isEmpty">(HashMaps.SeparateChaining method)</a>
+</li>
         <li><a href="InefficientSet.html#InefficientSet.Set.isEmpty">(InefficientSet.Set method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.isEmpty">(Map.Map method)</a>
 </li>
         <li><a href="Queue.html#Queue.Queue.isEmpty">(Queue.Queue method)</a>
 </li>
@@ -462,6 +561,34 @@
         <li><a href="SinglyLinkedList.html#SinglyLinkedList.SinglyLinkedList.isEmpty">(SinglyLinkedList.SinglyLinkedList method)</a>
 </li>
         <li><a href="Stack.html#Stack.Stack.isEmpty">(Stack.Stack method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.items">items() (HashMaps.OpenAddressing method)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.items">(HashMaps.SeparateChaining method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.BN.key">key (HashMaps.OpenAddressing.BN attribute)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.BucketNode.key">(HashMaps.SeparateChaining.BucketNode attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.keys_generator">keys_generator (HashMaps.OpenAddressing attribute)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.keys_generator">(HashMaps.SeparateChaining attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -477,11 +604,32 @@
 </li>
       </ul></li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.load_factor">load_factor() (HashMaps.OpenAddressing method)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.load_factor">(HashMaps.SeparateChaining method)</a>
+</li>
+        <li><a href="Set.html#Set.Set.load_factor">(Set.Set method)</a>
+</li>
+      </ul></li>
+  </ul></td>
 </tr></table>
 
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    Map
+
+      <ul>
+        <li><a href="Map.html#module-Map">module</a>
+</li>
+      </ul></li>
+      <li><a href="Map.html#Map.Map">Map (class in Map)</a>
+</li>
+      <li><a href="Map.html#Map.Map.Node">Map.Node (class in Map)</a>
+</li>
       <li>
     module
 
@@ -490,7 +638,11 @@
 </li>
         <li><a href="DoublyLinkedList.html#module-DoublyLinkedList">DoublyLinkedList</a>
 </li>
+        <li><a href="HashMaps.html#module-HashMaps">HashMaps</a>
+</li>
         <li><a href="InefficientSet.html#module-InefficientSet">InefficientSet</a>
+</li>
+        <li><a href="Map.html#module-Map">Map</a>
 </li>
         <li><a href="Queue.html#module-Queue">Queue</a>
 </li>
@@ -504,15 +656,55 @@
   </ul></td>
 </tr></table>
 
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.SeparateChaining.BucketNode.next">next (HashMaps.SeparateChaining.BucketNode attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing">OpenAddressing (class in HashMaps)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.BN">OpenAddressing.BN (class in HashMaps)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="Stack.html#Stack.Stack.pop">pop() (Stack.Stack method)</a>
 </li>
+      <li><a href="HashMaps.html#HashMaps.primes">primes() (in module HashMaps)</a>
+
+      <ul>
+        <li><a href="Set.html#Set.primes">(in module Set)</a>
+</li>
+      </ul></li>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.primes_generator">primes_generator (HashMaps.OpenAddressing attribute)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.primes_generator">(HashMaps.SeparateChaining attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="Stack.html#Stack.Stack.push">push() (Stack.Stack method)</a>
 </li>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.put">put() (HashMaps.OpenAddressing method)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.put">(HashMaps.SeparateChaining method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.put">(Map.Map method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -541,7 +733,13 @@
       <ul>
         <li><a href="DoublyLinkedList.html#DoublyLinkedList.DoublyLinkedList.remove">(DoublyLinkedList.DoublyLinkedList method)</a>
 </li>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.remove">(HashMaps.OpenAddressing method)</a>
+</li>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.remove">(HashMaps.SeparateChaining method)</a>
+</li>
         <li><a href="InefficientSet.html#InefficientSet.Set.remove">(InefficientSet.Set method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.remove">(Map.Map method)</a>
 </li>
         <li><a href="Set.html#Set.Set.remove">(Set.Set method)</a>
 </li>
@@ -564,6 +762,10 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.SeparateChaining">SeparateChaining (class in HashMaps)</a>
+</li>
+      <li><a href="HashMaps.html#HashMaps.SeparateChaining.BucketNode">SeparateChaining.BucketNode (class in HashMaps)</a>
+</li>
       <li>
     Set
 
@@ -599,7 +801,13 @@
       <ul>
         <li><a href="DoublyLinkedList.html#DoublyLinkedList.DoublyLinkedList.size">(DoublyLinkedList.DoublyLinkedList method)</a>
 </li>
+        <li><a href="HashMaps.html#HashMaps.OpenAddressing.size">(HashMaps.OpenAddressing method)</a>
+</li>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.size">(HashMaps.SeparateChaining method)</a>
+</li>
         <li><a href="InefficientSet.html#InefficientSet.Set.size">(InefficientSet.Set method)</a>
+</li>
+        <li><a href="Map.html#Map.Map.size">(Map.Map method)</a>
 </li>
         <li><a href="Queue.html#Queue.Queue.size">(Queue.Queue method)</a>
 </li>
@@ -659,6 +867,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="InefficientSet.html#InefficientSet.Set.validElement">validElement() (InefficientSet.Set method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="HashMaps.html#HashMaps.OpenAddressing.BN.value">value (HashMaps.OpenAddressing.BN attribute)</a>
+
+      <ul>
+        <li><a href="HashMaps.html#HashMaps.SeparateChaining.BucketNode.value">(HashMaps.SeparateChaining.BucketNode attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 

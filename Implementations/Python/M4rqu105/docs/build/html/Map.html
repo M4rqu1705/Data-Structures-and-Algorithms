@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Map module &mdash; M4rqu1705&#39;s Data Structures Implementations 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Queue module" href="Queue.html" />
+    <link rel="prev" title="InefficientSet module" href="InefficientSet.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> M4rqu1705's Data Structures Implementations
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">M4rqu105</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Bag.html">Bag module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DoublyLinkedList.html">DoublyLinkedList module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HashMaps.html">HashMaps module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InefficientSet.html">InefficientSet module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Map module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Queue.html">Queue module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Set.html">Set module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SinglyLinkedList.html">SinglyLinkedList module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stack.html">Stack module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">M4rqu1705's Data Structures Implementations</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">M4rqu105</a> &raquo;</li>
+        
+      <li>Map module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/Map.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-Map">
+<span id="map-module"></span><h1>Map module<a class="headerlink" href="#module-Map" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="Map.Map">
+<em class="property">class </em><code class="sig-prename descclassname">Map.</code><code class="sig-name descname">Map</code><a class="headerlink" href="#Map.Map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py class">
+<dt id="Map.Map.Node">
+<em class="property">class </em><code class="sig-name descname">Node</code><a class="headerlink" href="#Map.Map.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.__contains__">
+<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">param</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#Map.Map.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd><p>By default, when using the <cite>in</cite> Python operator, check if the
+parameter is a key of this map</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if key is contained inside map</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(1 + n/N)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.__repr__">
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#Map.Map.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent map in machine-readable string format as sequence of key, value tuples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Machine-readable string representation of map</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#Map.Map.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent map in string format as sequence of key, value tuples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>String representation of map</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; NoReturn<a class="headerlink" href="#Map.Map.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear map</p>
+<p>Remove all values in map, effectively returning it to its initial
+condition</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.containsKey">
+<code class="sig-name descname">containsKey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#Map.Map.containsKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines if there is a value with a given key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>any</strong> – Key that will be looked for inside map</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if key is contained inside map</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#Map.Map.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get value associated with key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>any</strong> – Key of the value being searched for</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None if not found, value if it was found</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>any</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.getKeys">
+<code class="sig-name descname">getKeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#Map.Map.getKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator of all the keys in map</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Latest key in map</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.getValues">
+<code class="sig-name descname">getValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#Map.Map.getValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator of all the values in map</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Latest value in map</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.isEmpty">
+<code class="sig-name descname">isEmpty</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#Map.Map.isEmpty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if map is empty</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the size of the map is 0</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(1)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.put">
+<code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#Map.Map.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add new value to the map with a given key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>any</strong> – Key to the value that will be added</p></li>
+<li><p><strong>any</strong> – Value to be added to the map</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Operation was successful</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#Map.Map.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove value with given key from map</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>any</strong> – Key to the value that will be removed</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Operation was successful</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(n)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Map.Map.size">
+<code class="sig-name descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#Map.Map.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get number of values in map</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Amount of values stored in map</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Time complexity: O(1)</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Queue.html" class="btn btn-neutral float-right" title="Queue module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="InefficientSet.html" class="btn btn-neutral float-left" title="InefficientSet module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, M4rqu1705.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

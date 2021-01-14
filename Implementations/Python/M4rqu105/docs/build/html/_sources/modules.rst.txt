@@ -6,7 +6,9 @@ M4rqu105
 
    Bag
    DoublyLinkedList
+   HashMaps
    InefficientSet
+   Map
    Queue
    Set
    SinglyLinkedList

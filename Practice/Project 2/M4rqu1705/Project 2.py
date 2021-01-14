@@ -102,64 +102,61 @@ def Map(data):
 
 
 
-def real_one(data):
-    freq = dict()
-
-    for el in data:
-        freq[el] = freq.get(el, 0) + 1
-
-    return freq
-
-def check(experiment, data):
-    freq_experimental = experiment(data)
-    freq = real_one(data)
-
-    for el in freq_experimental:
-        if el[1] != freq[el[0]]:
-            print(f'Error!! {el} != {el[0]} -> {freq[el[0]]}')
-            return None
-
-    print(f'Success!')
-
 def run_tests():
     results = dict()
 
     X = []
     Y = [[], [], [], []]
 
-    repetitions = 1000
-    for i in range(50, 1050, 50):
+    repetitions = 200
+    start = 50
+    end = 1000
+    step = 50
+
+    for i in range(start, end + step, step):
         temp_result = dict()
         data = generate_random_data(i)
         X.append(i)
 
-        start_time = time.time()
+        
+        total_time = 0
         for j in range(repetitions):
+            start_time = time.time()
             sequential(data)
-        temp_result['sequential'] = (time.time() - start_time) / repetitions
+            total_time += time.time() - start_time
+
+        temp_result['sequential'] = total_time / repetitions
         Y[0].append(temp_result['sequential'])
 
-        start_time = time.time()
+
+        total_time = 0
         for j in range(repetitions):
+            start_time = time.time()
             sorted_list(data)
-        temp_result['sorted_list'] = (time.time() - start_time) / repetitions
+            total_time += time.time() - start_time
+
+        temp_result['sorted_list'] = total_time / repetitions
         Y[1].append(temp_result['sorted_list'])
 
-        start_time = time.time()
+
+        total_time = 0
         for j in range(repetitions):
+            start_time = time.time()
             ordered(data)
-        temp_result['ordered'] = (time.time() - start_time) / repetitions
+            total_time += time.time() - start_time
+        temp_result['ordered'] = total_time / repetitions
         Y[2].append(temp_result['ordered'])
 
-        start_time = time.time()
+
+        total_time = 0
         for j in range(repetitions):
+            start_time = time.time()
             Map(data)
-        temp_result['map'] = (time.time() - start_time) / repetitions
+            total_time += time.time() - start_time
+        temp_result['map'] = total_time / repetitions
         Y[3].append(temp_result['map'])
 
         results[i] = temp_result
-
-    #  print(results)
 
     X = np.array(X)
     Y[0] = np.array(Y[0])

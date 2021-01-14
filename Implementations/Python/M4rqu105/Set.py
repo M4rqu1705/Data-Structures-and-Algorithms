@@ -70,10 +70,10 @@ class Set:
     def expand(self):
         if using_primes:
             new_capacity = next(self.primes_generator)
-            while (new_capacity <= self.capacity()):
+            while (new_capacity // 2 < self.capacity()):
                 new_capacity = next(self.primes_generator)
         else:
-            new_capacity = self.capacity() * 2
+            new_capacity = self.capacity() * 2 + 1
 
         tempSet = Set(new_capacity)
 
@@ -123,7 +123,7 @@ class Set:
             return False
 
         if using_primes:
-            if self.size() + 1 > self.capacity() * 0.7:
+            if self.size() + 1 > self.capacity() * 0.5:
                 self.expand()
         else:
             if self.size() + 1 > self.capacity() * 0.5:
