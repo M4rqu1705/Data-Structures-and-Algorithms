@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-repetitions = 200
+repetitions = 50
 start = 50
 end = 1000
-step = 50
+step = 100

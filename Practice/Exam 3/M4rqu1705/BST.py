@@ -3,7 +3,9 @@
 from typing import Any, NoReturn
 
 class BinarySearchTree:
-    class BSTNode:
+    __slots__ = ['root', 'current_size']
+
+    class Node:
         __slots__ = ['key', 'value', 'left', 'right']
 
         def __init__(self, key: Any = None, value: Any = None):
@@ -20,7 +22,7 @@ class BinarySearchTree:
 
 
     def __init__(self, key: Any, value: Any):
-        self.root = self.BSTNode(key, value)
+        self.root = self.Node(key, value)
         self.current_size = 1
 
 
@@ -38,23 +40,25 @@ class BinarySearchTree:
            Time complexity: O(log₂(n))
 
         '''
-        if node == -1:
-            node = self.root
+        def aux(key: Any, node) -> Any:
+            if node is None:
+                return None
 
-        if node is None:
-            return None
+            elif key == node.key:
+                return node.value
 
-        elif node.key == key:
-            return node.value
+            # If key is less than current node's key, get node from that subtree
+            elif key < node.key:
+                return aux(key, node.left)
 
-        elif key < node.key:
-            return self.get(key, node.left)
+            # If key is greater than to current node's key, get node from that subtree
+            else:
+                return aux(key, node.right)
 
-        else:
-            return self.get(key, node.right)
+        return aux(key, self.root)
 
-    
-    def add(self, key: Any, value: Any, node=-1) -> bool:
+
+    def add(self, key: Any, value: Any, node=-1) -> Any:
         '''Add element with specific keys
 
         Args:
@@ -63,45 +67,34 @@ class BinarySearchTree:
            any: Node that will add key-value pair
 
         Returns:
-           bool: True if operation is successful
-        
+           Node: Latest recursion's node
+
         Hint:
            Time complexity: O(log₂(n))
 
         '''
 
-        if node == -1:
-            node = self.root
+        def aux(key: Any, value: Any, node) -> Any:
+            # If found empty spot, add new node there
+            if node is None:
+                self.current_size += 1
+                return self.Node(key, value)
 
-        if self.root is None:
-            self.root = self.BSTNode(key, value)
-            return True
+            # If key is less than current node's key, add new node to that subtree
+            elif key < node.key:
+                node.left = aux(key, value, node.left)
 
-        else:
-            # Check if can be added to the left
-            if key < node.key:
-                if node.left is None:
-                    node.left = self.BSTNode(key, value)
-                    self.current_size += 1
-                else:
-                    self.add(key, value, node.left)
-
-            # Check if can be added to the right
-            elif key > node.key:
-                if node.right is None:
-                    node.right = self.BSTNode(key, value)
-                    self.current_size += 1
-                else:
-                    self.add(key, value, node.right)
-
-            # Replace current node's value with the new one
+            # If key is greather than or equal to current node's key, add new node to that subtree
             else:
-                node.value = value
+                node.right = aux(key, value, node.right)
 
-            return True
+            # By default return current node to update node in previous
+            return node
 
-    
-    def remove(self, key: Any, node=-1) -> bool:
+        self.root = aux(key, value, self.root)
+
+
+    def remove(self, key: Any, node=-1) -> Any:
         '''Remove element with particular key
 
         Args:
@@ -109,93 +102,53 @@ class BinarySearchTree:
            any: Node in which we are looking to remove value
 
         Returns:
-           bool: True if operation is successful
+           Node: Latest recursion's node
 
         Hint:
            Time complexity: O(log₂(n))
         '''
 
-        if node == -1:
-            node = self.root
+        def aux(key: Any, node) -> Any:
+            if key < node.key:
+                node.left = aux(key, node.left)
 
-        if node is None:
-            return False
+            elif key > node.key:
+                node.right = aux(key, node.right)
 
-        if self.get(key) is None:
-            return False
-
-        if self.root.key == key and self.root.left is None and self.root.right is None:
-            self.root = None
-            self.current_size -= 1
-
-        elif key < node.key:
-
-            # Edge case for leaf nodes
-            if node.left.key == key and node.left.left is None and node.left.right is None:
-                node.left = None
-                self.current_size -= 1
-                return True
-
-            # Every other case
             else:
-                return self.remove(key, node.left)
+                # If leaf node ...
+                if node.left is None and node.right is None:
+                    self.current_size -= 1
+                    return None
 
+                # If only has left node ...
+                elif node.right is None:
+                    self.current_size -= 1
+                    # replace this node with the left node
+                    return node.left
 
-        elif key > node.key:
-
-            # Edge case for leaf nodes
-            if node.right.key == key and node.right.left is None and node.right.right is None:
-                node.right = None
-                self.current_size -= 1
-                return True
-
-            # Every other case
-            else:
-                return self.remove(key, node.right)
-
-        else:
-            # If is a leaf node
-            if node.left is None and node.right is None:
-                return True
-
-            # If is internal node with no right child
-            elif node.right is None:
-                node.key = node.left.key
-                node.value = node.left.value
-                node.right = node.left.right
-                node.left = node.left.left
-
-                self.current_size -= 1
-
-                return True
-
-            # If is internal node with children
-            else:
-                # Go to leftmost node on right subtree
-                left_most = node.right
-                parent = node
-                while left_most.left is not None:
-                    parent = left_most
-                    left_most = left_most.left
-
-                # Replace with that left-most node
-                node.key = left_most.key
-                node.value = left_most.value
-                
-                # Delete left-most node from tree
-                if left_most is node.right:
-                    parent.right = None
+                # If has right node as well ...
                 else:
-                    parent.left = None
+                    left_most = node.right
 
-                self.current_size -= 1
-                
-                return True
+                    while left_most.left is not None:
+                        left_most = left_most.left
+
+                    result = self.Node(left_most.key, left_most.value)
+                    result.left = node.left
+                    result.right = aux(left_most.key, node.right)
+                    
+                    # Replace current node with the leftmost
+                    return result
+
+            return node
+
+        self.root = aux(key, self.root)
 
 
     def size(self) -> int:
         return self.current_size
-    
+
 
     def isEmpty(self) -> bool:
         return self.size() == 0
@@ -205,12 +158,13 @@ class BinarySearchTree:
         return self.get(key) is not None
 
 
-    def clear(self):
+    def clear(self) -> NoReturn:
         while not self.isEmpty():
+            breakpoint()
             self.remove(self.root.key)
 
 
-    def inorder(self, node = -1):
+    def inorder(self, node = -1) -> Any:
         if node == -1:
             node = self.root
 
@@ -222,7 +176,7 @@ class BinarySearchTree:
         if node.right is not None:
             yield from self.inorder(node.right)
 
-    def preorder(self, node = -1):
+    def preorder(self, node = -1) -> Any:
         if node == -1:
             node = self.root
 
@@ -235,7 +189,7 @@ class BinarySearchTree:
             yield from self.preorder(node.right)
 
 
-    def postorder(self, node = -1):
+    def postorder(self, node = -1) -> Any:
         if node == -1:
             node = self.root
 
@@ -248,27 +202,32 @@ class BinarySearchTree:
         yield node
 
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.root is not None:
             return ', '.join([str(node) for node in self.inorder()])
         else:
             return ''
 
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'{{{str(self)}}}'
 
 
 if __name__ == "__main__":
-    bst = BinarySearchTree("Moe", ("Moe", 24, "NY"))
+    bst = BinarySearchTree("Moe", 60)
 
-    bst.add("Jil", ("Jil", 19, "SF"))
-    bst.add("Cal", ("Cal", 32, "LA"))
-    bst.add("Lydia", ("Lydia", 30, "NM"))
-    bst.add("Kal-el", ("Kal-el", 17, "Smallville"))
-    bst.add("Ron", ("Ron", 19, "LA"))
-    bst.add("Owen", ("Owen", 40, "CH"))
-    bst.add("Xi", ("Xi", 29, "SJ"))
+    bst.add("Jil", 19)
+    bst.add("Cal", 32)
+    bst.add("Lydia", 30)
+    bst.add("Kal-el", 17)
+    bst.add("Ron", 19)
+    bst.add("Owen", 40)
+    bst.add("Xi", 29)
 
-    print(bst.remove("Xi"))
-    print(bst)
+    print(list(bst.inorder()))
+    print(list(bst.preorder()))
+    print(list(bst.postorder()))
+
+    breakpoint()
+
+
