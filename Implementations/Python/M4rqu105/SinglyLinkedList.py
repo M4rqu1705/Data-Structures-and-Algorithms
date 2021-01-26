@@ -26,7 +26,7 @@ class SinglyLinkedList:
                 self.append(None)
 
         # Otherwise assume param is an iterator and append all of its elements to the list
-        else:
+        elif param is not None:
             try:
                 iter(param)
 
@@ -34,10 +34,9 @@ class SinglyLinkedList:
                     self.append(element)
             # If iterator assumption fails, ignore param
             except:
-                pass
+                raise TypeError(f"Can only accept integers or iterators as initialization parameter for Singly Linked list. Received {type(param)}")
 
 
-    # 👜🎒 LINKED LIST ADT METHODS 💼🏎
 
     # Time complexity: O(1)
     def append(self, element):
@@ -53,7 +52,7 @@ class SinglyLinkedList:
 
             # Do some maintenance on dummy tail
             self.dummy_tail.next = self.head.next
-        
+
         # ... otherwise ...
         else:
             # Set it in the required position
@@ -63,13 +62,14 @@ class SinglyLinkedList:
             self.dummy_tail.next = self.dummy_tail.next.next
 
         self.currentSize += 1
+
         return True
 
 
     # Time complexity: O(n)
     def insert(self, index, element):
         # Check if index is valid
-        if 0 > index or index > self.size():
+        if index < 0 or index > self.size():
             raise IndexError(f"Index {index} outside of bounds for Singly Linked List of size {self.size()}")
 
         # Travel to the node exactly at the 'index'th position
@@ -81,13 +81,14 @@ class SinglyLinkedList:
 
         newNode = self.Node()
         newNode.value = element
+        newNode.next = current_node.next
 
         # Set it in the required position
         current_node.next = newNode
 
         # Do some maintenance on dummy tail, if necessary
         if current_node is self.dummy_tail.next:
-            self.dummy_tail = self.dummy_tail.next
+            self.dummy_tail.next = newNode
 
         self.currentSize += 1
         return True
@@ -99,28 +100,28 @@ class SinglyLinkedList:
         if self.isEmpty():
             return False
 
-        # Then check if element is inside our linked list. If not, there's no need to remove it
-        elif not self.contains(element):
+        # Travel to the node before the one that contains the desired element
+        node = self.head
+
+        while node.next.value != element and node.next.next is not None:
+            node = node.next
+
+        # If the node's value is not the one we are looking for, we did not find
+        # the desired item so we must return false
+        if node.next.value != element:
             return False
 
-        # Travel to the node before the one that contains the desired element
-        prev_node = self.head
-        current_node = prev_node.next
-
-        while current_node.value != element and current_node.next is not None:
-            prev_node = current_node
-            current_node = prev_node.next
-
         # Remove the current_node from linked list
-        prev_node.next = prev_node.next.next
+        temp = node.next
+        node.next = node.next.next
+        del temp
 
         # If element is the last on the list, we need to do maintenance on the dummy tail
-        if prev_node.next is None:
-            self.dummy_tail = prev_node
-
-        del current_node
+        if node.next is None:
+            self.dummy_tail = node
 
         self.currentSize -= 1
+
         return True
 
 
@@ -130,67 +131,56 @@ class SinglyLinkedList:
         if self.isEmpty():
             return 0
 
-        # Then check if element is inside our linked list. If not, there's no need to remove it
-        elif not self.contains(element):
-            return 0
-
-
         counter = 0
-        prev_node = self.head
-        current_node = prev_node.next
-        
-        while current_node is not self.dummy_tail.next:
+        node = self.head
+
+        for _ in range(self.size()):
             # Travel to the node that contains the desired element
-
-            while current_node.value != element and current_node.next is not None:
-                prev_node = current_node
-                current_node = prev_node.next
-
-            # Remove the current_node from linked list
-            prev_node.next = prev_node.next.next
+            while node.next.value != element and node.next.next is not None:
+                node = node.next
 
             # Element was not found again, break from while loop
-            if current_node.value != element:
-                break
+            if node.next.value == element:
+                # Remove the current_node from linked list
+                temp = node.next
 
-            # If element is the last on the list, we need to do maintenance on the dummy tail
-            elif prev_node.next is None:
-                self.dummy_tail = prev_node
+                node.next = node.next.next
+                del temp
 
+                counter += 1
 
-            del current_node
-
-            current_node = prev_node.next
-
-            counter += 1
+                # If element is the second-to-last on the list, we need to do maintenance on the dummy tail
+                if node.next is None:
+                    self.dummy_tail.next = node
+                    break
 
         self.currentSize -= counter
+
         return counter
 
 
     # Time complexity: O(n)
     def delete(self, index):
         # Check if index is valid
-        if 0 > index or index >= self.size():
+        if index < 0 or index >= self.size():
             raise IndexError(f"Index {index} outside of bounds for Singly Linked List of size {self.size()}")
 
         # Travel to the node exactly before the 'index'th position
-        prev_node = self.head
+        node = self.head
         i = 0
         while i < index:
-            prev_node = prev_node.next
+            node = node.next
             i += 1
 
-        current_node = prev_node.next
 
         # Remove the current_node from linked list
-        prev_node.next = prev_node.next.next
+        temp = node.next
+        node.next = node.next.next
+        del temp
 
         # If element is the last on the list, we need to do maintenance on the dummy tail
         if index == self.size() - 1:
-            self.dummy_tail.next = prev_node
-
-        del current_node
+            self.dummy_tail.next = node
 
         self.currentSize -= 1
 
@@ -200,33 +190,33 @@ class SinglyLinkedList:
     # Time complexity: O(n)
     def get(self, index):
         # Check if index is valid
-        if 0 > index or index >= self.size():
+        if index < 0 or index >= self.size():
             raise IndexError(f"Index {index} outside of bounds for Singly Linked List of size {self.size()}")
 
         # Travel to the node exactly at the 'index'th position
-        current_node = self.head
-        i = -1
+        node = self.head
+        i = 0
         while i < index:
-            current_node = current_node.next
+            node = node.next
             i += 1
 
-        return current_node.value
+        return node.next.value
 
 
     # Time complexity: O(n)
     def set(self, index, element):
         # Check if index is valid
-        if 0 > index or index >= self.size():
+        if index < 0 or index >= self.size():
             raise IndexError(f"Index {index} outside of bounds for Singly Linked List of size {self.size()}")
 
         # Travel to the node exactly at the 'index'th position
-        current_node = self.head
+        node = self.head
         i = -1
         while i < index:
-            current_node = current_node.next
+            node = node.next
             i += 1
 
-        current_node.value = element
+        node.value = element
 
         return True
 
@@ -261,7 +251,7 @@ class SinglyLinkedList:
         # Element was not found
         if current_node.value != element:
             return -1
-        
+
         else:
             return i
 
@@ -287,7 +277,7 @@ class SinglyLinkedList:
     def size(self):
         return self.currentSize
 
-    
+
     # Time complexity: O(1)
     def isEmpty(self):
         return self.size() == 0
@@ -468,7 +458,7 @@ class SinglyLinkedList:
 
         Hint:
             Time complexity: O(n)
-        
+
         '''
         total = 2166136261
 
@@ -494,9 +484,11 @@ class SinglyLinkedList:
             raise StopIteration
 
 if __name__ == "__main__":
-    ll1 = SinglyLinkedList(str)
+    ll1 = SinglyLinkedList()
     for i in range(65,91):
         ll1.append(chr(i))
 
+    ll1.insert(10, 'A')
+    ll1.append('A')
     print(ll1)
     breakpoint()
